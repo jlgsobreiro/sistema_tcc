@@ -1,5 +1,7 @@
 import hashlib
 
+from dao.base import BaseDao
+
 
 class User:
     def __init__(self, **kwargs):
@@ -10,7 +12,7 @@ class User:
         self.firstname = kwargs.get('firstname')
         self.lastname = kwargs.get('lastname')
         self.email = kwargs.get('email')
-        self.is_authenticated = False
+        self.is_authenticated = self.is_authenticated(token=kwargs.get('token'))
         self.is_active = True
         self.is_anonymous = False
 
@@ -35,3 +37,10 @@ class User:
         self.lastname = dict_user.get('lastname')
         self.email = dict_user.get('email')
         return self
+
+    def is_authenticated(self, token: str):
+        sql_conn = BaseDao().database_get_connection()
+        query = f"select * from Tokens where token = '{token}' AND user_id = '{self.username}'"
+        res = sql_conn.execute(query).fetchone()
+        sql_conn.close()
+        return res is not None

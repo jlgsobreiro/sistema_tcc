@@ -1,9 +1,10 @@
+import flask
 import flask_login
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap5
-from flask import Flask, request, render_template, flash, redirect
+from flask import Flask, request, render_template, flash, redirect, session
 from flask_toastr import Toastr
-from flask_login import LoginManager, login_user
+from flask_login import LoginManager, login_user, login_required
 from requests import post
 
 from _models.User import User
@@ -20,7 +21,9 @@ app.config.from_pyfile("instance/config.py")
 
 @login_manager.user_loader
 def load_user(user_id):
-    return Users().get_user_by_username(user_id).get_id()
+    print(session.get('_id')+' Session')
+
+    return Users().get_user_by_username(user_id, session.get('_id'))
 
 
 @app.route('/')
@@ -40,6 +43,7 @@ def loja_product_id():
 
 
 @app.route('/profile/<_id>/edit')
+@login_required
 def profile_id_edit(_id):
     return render_template('profile_edit.html', current_user=Users().get_user_by_username(_id))
 
@@ -78,6 +82,8 @@ def api_login():
         res = Users().login(username=username, password=password)
         if res.get('user') is not None:
             login_user(res.get('user'))
+            session['_id'] = res.get('token')
+            print(res.get('token')+' Token')
             flash('Login com sucesso', 'success')
         else:
             flash(res.get('error'), 'error')

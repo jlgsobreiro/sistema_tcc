@@ -5,8 +5,8 @@ import sys
 
 class BaseDao:
     def __init__(self):
-        self.DATABASE = "C:\\Users\\jl_so\\Documents\\sisteminha2\\api\\database.db"
-        self.SCHEMASQL = "C:\\Users\\jl_so\\Documents\\sisteminha2\\api\\schema.sql"
+        self.DATABASE = "C:\\Users\\jl_so\\Documents\\sistema_tcc\\api\\database.db"
+        self.SCHEMASQL = "C:\\Users\\jl_so\\Documents\\sistema_tcc\\api\\schema.sql"
 
     def __initialize__(self):
         sql = self.database_get_connection()

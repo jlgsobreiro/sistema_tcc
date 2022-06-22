@@ -10,3 +10,9 @@ create table if not exists Users (
     is_anonymous blob
 );
 
+create table if not exists Tokens (
+    token text primary key,
+    user_id text not null ,
+    foreign key(user_id) REFERENCES Users(username)
+)
+
