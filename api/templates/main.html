@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% from 'components/assets/carousel.html' import carousel %}
+{% from 'components/assets/nav-bar.html' import nav_bar %}
+{% block tittle %}Main{% endblock %}
+{% block content %}
+    {{ nav_bar(current_user) }}
+    {{ carousel([{'id':1,'image':'','alt':'1'},{'id':2,'image':'','alt':'2'},{'id':3,'image':'','alt':'3'}]) }}
+{% endblock %}

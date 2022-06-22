@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {% block styles %}
+            <!-- Bootstrap CSS -->
+
+        {% endblock %}
+
+        <title>{% block tittle %}{% endblock %}</title>
+        {% endblock %}
+        <!-- <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" /> -->
+        {{ bootstrap.load_css() }}
+        {{ toastr.include_jquery() }}
+        {{ toastr.include_toastr_css() }}
+        {{ toastr.message() }}
+    </head>
+    <body>
+        <!-- Your page content -->
+        {% block content %}{% endblock %}
+
+        {% block scripts %}
+            <!-- Optional JavaScript -->
+
+        {% endblock %}
+        {{ bootstrap.load_js() }}
+        {{ toastr.include_toastr_js() }}
+        <!--<script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
+    </body>
+</html>

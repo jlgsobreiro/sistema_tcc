@@ -1,0 +1,27 @@
+{% macro login() %}
+    <h1>Sign In</h1>
+    <form action="/api/login" method="post" class="text-center">
+        <div class="mb-3">
+          <label for="lg_username" class="form-label">Username</label>
+          <input name="username" type="text" class="form-control" id="lg_username" placeholder="Heisenberg">
+        </div>
+        <div class="mb-3">
+          <label for="lg_password" class="form-label">Password</label>
+          <input name="password" type="password" class="form-control" id="lg_password" placeholder="Password">
+        </div>
+        <button class="btn-success" type="submit">Submit</button>
+    </form>
+{% endmacro %}
+{% macro nav_login() %}
+    <form method="post" action="/api/login" class="d-flex">
+        <input name="username" id="lg_username" class="form-control me-1" type="text" placeholder="Username" aria-label="Username">
+        <input name="password" id="lg_password" class="form-control me-1" type="password" placeholder="Password" aria-label="Password">
+        <button class="btn-success" type="submit">Log In</button>
+        <a href="/login" class="btn-success w-25" type="button">Sign In</a>
+    </form>
+{% endmacro %}
+{% macro nav_logout() %}
+    <form method="post" action="/api/logout" class="d-flex">
+        <button  onclick="window.location.href='{{ url_for('root') }}'" class="btn-success h-100 me-1" type="submit">Log out</button>
+    </form>
+{% endmacro %}
