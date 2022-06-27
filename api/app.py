@@ -1,8 +1,12 @@
+import datetime
+import http
+from asyncio import sleep
+
 import flask
 import flask_login
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap5
-from flask import Flask, request, render_template, flash, redirect, session
+from flask import Flask, request, render_template, flash, redirect, session, Response, url_for
 from flask_toastr import Toastr
 from flask_login import LoginManager, login_user, login_required
 from requests import post
@@ -21,9 +25,9 @@ app.config.from_pyfile("instance/config.py")
 
 @login_manager.user_loader
 def load_user(user_id):
-    print(session.get('_id')+' Session')
-
-    return Users().get_user_by_username(user_id, session.get('_id'))
+    remember_token = request.cookies.get('remember_token')
+    user = Users().get_user_by_token(remember_token)
+    return user if user_id != user.username else login_manager.unauthorized_callback
 
 
 @app.route('/')
@@ -33,19 +37,26 @@ def root():
 
 
 @app.route('/shop/<_id>')
-def loja_id():
+def loja_id(_id):
     return render_template('shop.html')
 
 
+@app.route('/shop/<_id>/edit')
+def edit_loja_id(_id):
+    return render_template('shop_edit.html')
+
+
 @app.route('/shop/<_id>/product/<_product_id>')
-def loja_product_id():
+def loja_product_id(_id, _product_id):
     return render_template('product.html')
 
 
 @app.route('/profile/<_id>/edit')
 @login_required
 def profile_id_edit(_id):
-    return render_template('profile_edit.html', current_user=Users().get_user_by_username(_id))
+    print(flask_login.current_user)
+    remember_token = session.get('remember_token')
+    return render_template('profile_edit.html', current_user=Users().get_user_by_token(remember_token))
 
 
 @app.route('/profile/<_id>')
@@ -54,7 +65,7 @@ def profile_id(_id):
 
 
 @app.route('/profile/<_id>/shop/<_shop_id>')
-def profile_loja_id():
+def profile_loja_id(_id, _shop_id):
     return render_template('shop_profile.html')
 
 
@@ -64,7 +75,6 @@ def login_screen():
         username = request.form.get('lg_username')
         password = request.form.get('lg_password')
         res = Users().login(username, password)
-        print(res.json['error'])
         if res.json['error'] is None:
             login_user(res)
             flash("Usuario cadastrado", "success")
@@ -76,18 +86,24 @@ def login_screen():
 
 @app.route('/api/login', methods=['GET', 'POST'])
 def api_login():
+    username = ''
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
         res = Users().login(username=username, password=password)
-        if res.get('user') is not None:
-            login_user(res.get('user'))
-            session['_id'] = res.get('token')
-            print(res.get('token')+' Token')
+        user = res.get('user')
+        if user is not None:
+            try:
+                ress = login_user(user, duration=datetime.timedelta(days=7), remember=True)
+                print(ress)
+            except Exception as e:
+                print(e)
+            # session['_id'] = res.get('token')
+            # request.cookies['remember_token'] = res.get('token')
             flash('Login com sucesso', 'success')
         else:
             flash(res.get('error'), 'error')
-    return redirect('/')
+    return redirect(url_for('root', username=username))
 
 
 @app.route('/api/register', methods=['GET', 'POST'])
@@ -115,6 +131,13 @@ def api_register():
 
 @app.route('/api/logout', methods=['GET', 'POST'])
 def api_logout():
+    cookie_remember = request.cookies.get('remember_token')
+    cookie_session = request.cookies.get('session')
+    try:
+        Users().del_tokens(flask_login.current_user.username, cookie_remember)
+        Users().del_tokens(flask_login.current_user.username, cookie_session)
+    except Exception as e:
+        print(e)
     flask_login.logout_user()
     flash('Logged out', 'Success')
     return redirect('/')

@@ -9,6 +9,11 @@
     <input name="user" id="user" class="form-control me-1" value="{{ current_user.username }}">
     <label for="email">Email</label>
     <input name="email" id="email" class="form-control me-1" value="{{ current_user.email }}">
+    {% if current_user.is_shop %}
+        <button class="btn-outline-success" type="button" onclick="{{ url_for('edit_loja_id') }}">Edit shop</button>
+    {% else %}
+        <button class="btn-outline-success" type="button">Create shop</button>
+    {% endif %}
     <button class="btn-success" type="submit">Save changes</button>
 </form>
 {% endblock %}

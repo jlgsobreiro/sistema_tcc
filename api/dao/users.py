@@ -45,9 +45,9 @@ class Users(BaseDao):
         sql_conn.close()
         if dict_user.get('passwordHash') != hashlib.sha512(password.encode("utf-8")).hexdigest():
             return {'error': 'Invalid password'}
-        token = encode_auth_token(username=username)
-        self.register_token(token=token, username=username)
-        return {'user': User().from_dict(dict_user), 'token': token}
+        #token = encode_auth_token(username=username)
+        #self.register_token(token=token, username=username)
+        return {'user': User().from_dict(dict_user)}
 
     def get_user_by_username(self, username: str, token: str):
         sql_conn = self.database_get_connection()
@@ -56,7 +56,7 @@ class Users(BaseDao):
         desription = [resultado[0] for resultado in sql_conn.execute(query).description]
         dict_user = {desc: x[desription.index(desc)] for desc in desription}
         sql_conn.close()
-        return User(token=token).from_dict(dict_user)
+        return User(token=token, username=username).from_dict(dict_user)
 
     def register_token(self, token: str, username: str):
         sql_conn = self.database_get_connection()
@@ -72,9 +72,18 @@ class Users(BaseDao):
         sql_conn.close()
         return res
 
-    def del_tokens(self, username: str, token: str):
+    def get_user_by_token(self, token: str):
         sql_conn = self.database_get_connection()
-        query = f"delete from Tokens where user_id = '{username}' AND token = '{token}')"
+        query = f"select * from Tokens where token = '{token}'"
+        res = sql_conn.execute(query).fetchone()
+        user = self.get_user_by_username(res[1], res[0])
+        sql_conn.close()
+        return user
+
+    def del_tokens(self, username: str, token: str):
+        query_username = f"user_id = '{username}' AND" if username == '' else ''
+        sql_conn = self.database_get_connection()
+        query = f"delete from Tokens where {query_username} token = '{token}'"
         res = sql_conn.execute(query).fetchone()
         sql_conn.commit()
         sql_conn.close()
@@ -82,7 +91,7 @@ class Users(BaseDao):
 
     def check_token(self, token: str, username: str):
         sql_conn = self.database_get_connection()
-        query = f"select * from Tokens where token = '{token}' AND user_id = '{username}')"
+        query = f"select * from Tokens where token = '{token}' AND user_id = '{username}'"
         res = sql_conn.execute(query).fetchone()
         sql_conn.close()
         return res is not None
