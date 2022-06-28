@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="database.db">
   <database-model serializer="dbm" dbms="SQLITE" family-id="SQLITE" format-version="4.40">
-    <root id="1"/>
+    <root id="1">
+      <ServerVersion>3.36.0</ServerVersion>
+    </root>
     <collation id="2" parent="1" name="BINARY"/>
     <collation id="3" parent="1" name="NOCASE"/>
     <collation id="4" parent="1" name="RTRIM"/>
@@ -1282,124 +1284,90 @@
     <argument id="472" parent="162">
       <Position>1</Position>
     </argument>
-    <table id="473" parent="163" name="Tokens"/>
-    <table id="474" parent="163" name="Users"/>
-    <table id="475" parent="163" name="sqlite_master">
+    <table id="473" parent="163" name="Users"/>
+    <table id="474" parent="163" name="sqlite_master">
       <System>1</System>
     </table>
-    <table id="476" parent="163" name="sqlite_sequence">
+    <table id="475" parent="163" name="sqlite_sequence">
       <System>1</System>
     </table>
-    <column id="477" parent="473" name="token">
-      <DataType>text|0s</DataType>
-      <Position>1</Position>
-    </column>
-    <column id="478" parent="473" name="user_id">
-      <DataType>text|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <foreign-key id="479" parent="473">
-      <ColNames>user_id</ColNames>
-      <RefColNames>username</RefColNames>
-      <RefTableName>Users</RefTableName>
-    </foreign-key>
-    <index id="480" parent="473" name="sqlite_autoindex_Tokens_1">
-      <ColNames>token</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <Unique>1</Unique>
-    </index>
-    <key id="481" parent="473">
-      <ColNames>token</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_Tokens_1</UnderlyingIndexName>
-    </key>
-    <column id="482" parent="474" name="id">
+    <column id="476" parent="473" name="id">
       <AutoIncrement>1</AutoIncrement>
       <DataType>integer|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="483" parent="474" name="username">
+    <column id="477" parent="473" name="username">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="484" parent="474" name="passwordHash">
+    <column id="478" parent="473" name="passwordHash">
       <DataType>blob|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="485" parent="474" name="firstname">
+    <column id="479" parent="473" name="firstname">
       <DataType>text|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="486" parent="474" name="lastname">
+    <column id="480" parent="473" name="lastname">
       <DataType>text|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="487" parent="474" name="email">
+    <column id="481" parent="473" name="email">
       <DataType>text|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="488" parent="474" name="is_authenticated">
-      <DataType>blob|0s</DataType>
+    <column id="482" parent="473" name="active">
+      <DataType>BLOB|0s</DataType>
       <Position>7</Position>
     </column>
-    <column id="489" parent="474" name="is_active">
-      <DataType>BLOB|0s</DataType>
-      <Position>8</Position>
-    </column>
-    <column id="490" parent="474" name="is_anonymous">
-      <DataType>blob|0s</DataType>
-      <Position>9</Position>
-    </column>
-    <index id="491" parent="474" name="sqlite_autoindex_Users_1">
+    <index id="483" parent="473" name="sqlite_autoindex_Users_1">
       <ColNames>username</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="492" parent="474" name="sqlite_autoindex_Users_2">
+    <index id="484" parent="473" name="sqlite_autoindex_Users_2">
       <ColNames>email</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="493" parent="474">
+    <key id="485" parent="473">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexColNames>id</UnderlyingIndexColNames>
     </key>
-    <key id="494" parent="474">
+    <key id="486" parent="473">
       <ColNames>username</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_Users_1</UnderlyingIndexName>
     </key>
-    <key id="495" parent="474">
+    <key id="487" parent="473">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_Users_2</UnderlyingIndexName>
     </key>
-    <column id="496" parent="475" name="type">
+    <column id="488" parent="474" name="type">
       <DataType>text|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="497" parent="475" name="name">
+    <column id="489" parent="474" name="name">
       <DataType>text|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="498" parent="475" name="tbl_name">
+    <column id="490" parent="474" name="tbl_name">
       <DataType>text|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="499" parent="475" name="rootpage">
+    <column id="491" parent="474" name="rootpage">
       <DataType>int|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="500" parent="475" name="sql">
+    <column id="492" parent="474" name="sql">
       <DataType>text|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="501" parent="476" name="name">
+    <column id="493" parent="475" name="name">
       <Position>1</Position>
     </column>
-    <column id="502" parent="476" name="seq">
+    <column id="494" parent="475" name="seq">
       <Position>2</Position>
     </column>
   </database-model>

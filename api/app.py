@@ -25,9 +25,10 @@ app.config.from_pyfile("instance/config.py")
 
 @login_manager.user_loader
 def load_user(user_id):
-    remember_token = request.cookies.get('remember_token')
-    user = Users().get_user_by_token(remember_token)
-    return user if user_id != user.username else login_manager.unauthorized_callback
+    user = Users().get_user_by_username(username=user_id)
+    if user is None:
+        return None
+    return user if user_id == user.username else None
 
 
 @app.route('/')
@@ -51,12 +52,27 @@ def loja_product_id(_id, _product_id):
     return render_template('product.html')
 
 
-@app.route('/profile/<_id>/edit')
+@app.route('/profile/<_id>/edit', methods=['GET', 'POST'])
 @login_required
 def profile_id_edit(_id):
-    print(flask_login.current_user)
-    remember_token = session.get('remember_token')
-    return render_template('profile_edit.html', current_user=Users().get_user_by_token(remember_token))
+    current_user = flask_login.current_user
+    if request.method == 'POST':
+        first_name = request.form.get('firstname') if request.form.get('firstname') is not None else ''
+        last_name = request.form.get('lastname') if request.form.get('lastname') is not None else ''
+        email = request.form.get('email') if request.form.get('email') is not None else ''
+        changes = 0
+        if current_user.firstname != first_name:
+            current_user.firstname = first_name
+            changes += 1
+        if current_user.lastname != last_name:
+            current_user.lastname = last_name
+            changes += 1
+        if current_user.email != email:
+            current_user.email = email
+            changes += 1
+        if changes > 0:
+            Users().update_user(user=current_user)
+    return render_template('profile_edit.html', current_user=Users().get_user_by_username(username=_id))
 
 
 @app.route('/profile/<_id>')
@@ -103,7 +119,7 @@ def api_login():
             flash('Login com sucesso', 'success')
         else:
             flash(res.get('error'), 'error')
-    return redirect(url_for('root', username=username))
+    return redirect(url_for('root'))
 
 
 @app.route('/api/register', methods=['GET', 'POST'])
@@ -131,13 +147,6 @@ def api_register():
 
 @app.route('/api/logout', methods=['GET', 'POST'])
 def api_logout():
-    cookie_remember = request.cookies.get('remember_token')
-    cookie_session = request.cookies.get('session')
-    try:
-        Users().del_tokens(flask_login.current_user.username, cookie_remember)
-        Users().del_tokens(flask_login.current_user.username, cookie_session)
-    except Exception as e:
-        print(e)
     flask_login.logout_user()
     flash('Logged out', 'Success')
     return redirect('/')

@@ -5,9 +5,7 @@ create table if not exists Users (
     firstname text,
     lastname text,
     email text unique,
-    is_authenticated blob,
-    is_active BLOB,
-    is_anonymous blob
+    active BLOB
 );
 
 create table if not exists Tokens (

@@ -1,5 +1,6 @@
 import hashlib
 import http
+from deepdiff import DeepDiff
 
 from flask import Response, jsonify
 
@@ -23,8 +24,8 @@ class Users(BaseDao):
         sql_conn = self.database_get_connection()
         try:
             sql_conn.execute("INSERT INTO Users "
-                             f"({user_description_str},is_authenticated,is_active,is_anonymous) "
-                             f"values ({user_values_str},FALSE, TRUE, FALSE)")
+                             f"({user_description_str}) "
+                             f"values ({user_values_str})")
             sql_conn.commit()
             user_token = encode_auth_token(user.username)
             return {'token': user_token}
@@ -33,65 +34,62 @@ class Users(BaseDao):
         finally:
             sql_conn.close()
 
-    def login(self, username: str, password: str):
+    def get_table_users_description(self):
         sql_conn = self.database_get_connection()
+        query = f"select * from Users"
+        description = [resultado[0] for resultado in sql_conn.execute(query).description]
+        sql_conn.close()
+        return description
+
+    def user_to_dict(self, username: str):
+        sql_conn = self.database_get_connection()
+        description = self.get_table_users_description()
         query = f"select * from Users where username = '{username}'"
         x = sql_conn.execute(query).fetchone()
         if x is None:
             sql_conn.close()
-            return {'error': 'Invalid username'}
-        desription = [resultado[0] for resultado in sql_conn.execute(query).description]
-        dict_user = {desc: x[desription.index(desc)] for desc in desription}
+            return None
+        dict_user = {desc: x[description.index(desc)] for desc in description}
         sql_conn.close()
+        return dict_user
+
+    def user_object_to_dict(self, user: User):
+        if user is None:
+            return None
+        description = self.get_table_users_description()
+        dict_user = {desc: user.as_list()[description.index(desc)] for desc in description}
+        return dict_user
+
+    def login(self, username: str, password: str):
+        dict_user = self.user_to_dict(username=username)
+        if dict_user is None:
+            return {'error': 'Invalid username'}
         if dict_user.get('passwordHash') != hashlib.sha512(password.encode("utf-8")).hexdigest():
             return {'error': 'Invalid password'}
         #token = encode_auth_token(username=username)
         #self.register_token(token=token, username=username)
         return {'user': User().from_dict(dict_user)}
 
-    def get_user_by_username(self, username: str, token: str):
-        sql_conn = self.database_get_connection()
-        query = f"select * from Users where '{username}' = username"
-        x = sql_conn.execute(query).fetchone()
-        desription = [resultado[0] for resultado in sql_conn.execute(query).description]
-        dict_user = {desc: x[desription.index(desc)] for desc in desription}
-        sql_conn.close()
-        return User(token=token, username=username).from_dict(dict_user)
+    def get_user_by_username(self, username: str):
+        dict_user = self.user_to_dict(username=username)
+        return User(username=username).from_dict(dict_user) if dict_user is not None else None
 
-    def register_token(self, token: str, username: str):
+    def update_user(self, user: User):
         sql_conn = self.database_get_connection()
-        query = f"Insert into Tokens values ('{token}','{username}')"
+        updated_user = self.user_object_to_dict(user)
+        user_to_update = self.user_to_dict(username=user.username)
+        if updated_user == user_to_update:
+            return None
+        values = []
+        if updated_user.get('firstname') != user_to_update.get('firstname'):
+            values.append(f"firstname = '{updated_user.get('firstname')}'")
+        if updated_user.get('lastname') != user_to_update.get('lastname'):
+            values.append(f"lastname = '{updated_user.get('lastname')}'")
+        if updated_user.get('email') != user_to_update.get('email'):
+            values.append(f"email = '{updated_user.get('email')}'")
+        values = ','.join(x for x in values)
+        query = f"Update Users set {values} where username = '{user_to_update.get('username')}'"
         sql_conn.execute(query)
         sql_conn.commit()
         sql_conn.close()
 
-    def get_tokens(self, username: str):
-        sql_conn = self.database_get_connection()
-        query = f"select * from Tokens where user_id = '{username}')"
-        res = sql_conn.execute(query).fetchall()
-        sql_conn.close()
-        return res
-
-    def get_user_by_token(self, token: str):
-        sql_conn = self.database_get_connection()
-        query = f"select * from Tokens where token = '{token}'"
-        res = sql_conn.execute(query).fetchone()
-        user = self.get_user_by_username(res[1], res[0])
-        sql_conn.close()
-        return user
-
-    def del_tokens(self, username: str, token: str):
-        query_username = f"user_id = '{username}' AND" if username == '' else ''
-        sql_conn = self.database_get_connection()
-        query = f"delete from Tokens where {query_username} token = '{token}'"
-        res = sql_conn.execute(query).fetchone()
-        sql_conn.commit()
-        sql_conn.close()
-        return res
-
-    def check_token(self, token: str, username: str):
-        sql_conn = self.database_get_connection()
-        query = f"select * from Tokens where token = '{token}' AND user_id = '{username}'"
-        res = sql_conn.execute(query).fetchone()
-        sql_conn.close()
-        return res is not None

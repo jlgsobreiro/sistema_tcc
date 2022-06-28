@@ -5,7 +5,6 @@ from dao.base import BaseDao
 
 class User:
     def __init__(self, **kwargs):
-        self.active = True
         self._id = None
         self.username = kwargs.get('username')
         self.passwordhash = hashlib.sha512(kwargs.get('password').encode("utf-8")).hexdigest() \
@@ -13,6 +12,7 @@ class User:
         self.firstname = kwargs.get('firstname')
         self.lastname = kwargs.get('lastname')
         self.email = kwargs.get('email')
+        self.active = True
 
     def as_list(self):
         return [
@@ -21,7 +21,8 @@ class User:
             self.passwordhash,
             self.firstname,
             self.lastname,
-            self.email
+            self.email,
+            self.active
         ]
 
     def get_id(self):
@@ -34,21 +35,11 @@ class User:
         self.firstname = dict_user.get('firstname')
         self.lastname = dict_user.get('lastname')
         self.email = dict_user.get('email')
+        self.active = dict_user.get('active')
         return self
 
-    def authenticate(self, token: str):
-        sql_conn = BaseDao().database_get_connection()
-        query = f"select * from Tokens where token = '{token}' AND user_id = '{self.username}'"
-        res = sql_conn.execute(query).fetchone()
-        sql_conn.close()
-        self.is_authenticated = res is not None
-
-    def is_authenticated(self, token: str):
-        sql_conn = BaseDao().database_get_connection()
-        query = f"select * from Tokens where token = '{token}' AND user_id = '{self.username}'"
-        res = sql_conn.execute(query).fetchone()
-        sql_conn.close()
-        return res is not None
+    def is_authenticated(self):
+        return True
 
     def is_active(self):
         return self.active
