@@ -1,12 +1,6 @@
 import hashlib
-import http
-from deepdiff import DeepDiff
-
-from flask import Response, jsonify
-
 from dao.base import BaseDao
 from _models.User import User
-from _token.token import encode_auth_token
 
 
 class Users(BaseDao):

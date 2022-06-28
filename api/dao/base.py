@@ -1,12 +1,10 @@
-import os
 import sqlite3
-import sys
 
 
 class BaseDao:
     def __init__(self):
-        self.DATABASE = "C:\\Users\\jl_so\\Documents\\sistema_tcc\\api\\database.db"
-        self.SCHEMASQL = "C:\\Users\\jl_so\\Documents\\sistema_tcc\\api\\schema.sql"
+        self.DATABASE = "api/database.db"
+        self.SCHEMASQL = "api/schema.sql"
 
     def __initialize__(self):
         sql = self.database_get_connection()

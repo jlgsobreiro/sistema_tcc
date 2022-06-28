@@ -1,15 +1,10 @@
 import datetime
-import http
-from asyncio import sleep
 
-import flask
 import flask_login
-from flask_wtf import FlaskForm
+from flask import Flask, request, render_template, flash, redirect, url_for
 from flask_bootstrap import Bootstrap5
-from flask import Flask, request, render_template, flash, redirect, session, Response, url_for
-from flask_toastr import Toastr
 from flask_login import LoginManager, login_user, login_required
-from requests import post
+from flask_toastr import Toastr
 
 from _models.User import User
 from dao.users import Users

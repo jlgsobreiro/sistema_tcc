@@ -1,7 +1,5 @@
 import hashlib
 
-from dao.base import BaseDao
-
 
 class User:
     def __init__(self, **kwargs):
