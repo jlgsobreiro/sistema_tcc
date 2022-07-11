@@ -3,7 +3,7 @@ import hashlib
 
 class User:
     def __init__(self, **kwargs):
-        self._id = None
+        self._id = kwargs.get('_id')
         self.username = kwargs.get('username')
         self.passwordhash = hashlib.sha512(kwargs.get('password').encode("utf-8")).hexdigest() \
             if kwargs.get('password') is not None else None
@@ -24,16 +24,11 @@ class User:
         ]
 
     def get_id(self):
-        return self.username
+        return self._id
 
     def from_dict(self, dict_user: dict):
-        self._id = dict_user.get('_id')
-        self.username = dict_user.get('username')
-        self.passwordhash = None
-        self.firstname = dict_user.get('firstname')
-        self.lastname = dict_user.get('lastname')
-        self.email = dict_user.get('email')
-        self.active = dict_user.get('active')
+        for key in dict_user:
+            setattr(self, key, dict_user[key])
         return self
 
     def is_authenticated(self):
@@ -44,6 +39,3 @@ class User:
 
     def is_anonymous(self):
         return False
-
-    def get_user_by_token(self):
-        pass

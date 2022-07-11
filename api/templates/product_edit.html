@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post" class="form-control" action="/shop/{{ shop.get_id() }}/product/{{ product.get_id() }}/edit">
+        <label for="name">Name</label>
+        <input name="name" id="name" class="form-control me-1" value="{{ product.name }}">
+        <label for="unity_type">unity_type</label>
+        <input name="unity_type" id="unity_type" class="form-control me-1" value="{{ product.unity_type }}">
+        <label for="selling_price">sell_price</label>
+        <input name="selling_price" id="selling_price" class="form-control me-1" value="{{ product.selling_price }}">
+        <label for="cost_price">sell_price</label>
+        <input name="cost_price" id="cost_price" class="form-control me-1" value="{{ product.cost_price }}">
+        <label for="barcode">sell_price</label>
+        <input name="barcode" id="barcode" class="form-control me-1" value="{{ product.barcode }}">
+        <label for="bought_from">sell_price</label>
+        <input name="bought_from" id="bought_from" class="form-control me-1" value="{{ product.bought_from }}">
+        <label for="active">sell_price</label>
+        <input name="active" id="active" class="form-control me-1" value="{{ product.active }}">
+
+        <button class="btn-success" type="submit">Save changes</button>
+    </form>
+    <button class="btn-success" type="button">
+        <a class="btn-success" href="{{ url_for('root')}}">Home</a>
+    </button>
+{% endblock %}
