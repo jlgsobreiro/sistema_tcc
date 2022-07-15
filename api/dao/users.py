@@ -20,6 +20,19 @@ class Users(BaseDao):
         user = self.to_class_object(where=f"username = '{username}'", class_reference=User)
         return user
 
+    def get_user_by_id(self, user_id: str):
+        user = self.to_class_object(where=f"_id = '{user_id}'", class_reference=User)
+        return user
+
     def update_user(self, updated_user: User):
         where = f"username = '{updated_user.username}'"
         return self.update(where=where, updated_object=updated_user, class_reference=User)
+
+    def check_writeble_fields(self):
+        try:
+            if len(self.get_writeble_fields()) == 0:
+                fields = [x for x in User().__dict__.keys() if '_id' not in x]
+                self.set_writeble_fields(fields=fields)
+                return None
+        except Exception as e:
+            return e

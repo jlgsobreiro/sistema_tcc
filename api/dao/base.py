@@ -84,7 +84,8 @@ class BaseDao:
             return None
         list_objects = []
         for item in x:
-            list_objects.append(class_reference().from_dict({desc: item[description.index(desc)] for desc in description}))
+            list_objects.append(
+                class_reference().from_dict({desc: item[description.index(desc)] for desc in description}))
         sql_conn.close()
         return list_objects
 
@@ -120,3 +121,25 @@ class BaseDao:
             return {'error': e}
         finally:
             sql_conn.close()
+
+    def get_writeble_fields(self):
+        sql_conn = self.database_get_connection()
+        fields = sql_conn.execute(
+            f"select field_name from Writeble_Fields where table_name = '{self.TABLE_NAME}'").fetchall()
+        sql_conn.close()
+        return fields
+
+    def set_writeble_fields(self, fields: list):
+        sql_conn = self.database_get_connection()
+        try:
+            for field in fields:
+                sql_conn.execute(
+                    f"INSERT INTO Writeble_Fields (table_name, field_name) values ('{self.TABLE_NAME}','{field}')")
+            sql_conn.commit()
+        except Exception as e:
+            sql_conn.rollback()
+            return {'error': e}
+        finally:
+            sql_conn.close()
+
+

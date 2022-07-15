@@ -1,3 +1,4 @@
+from _models.ShopAdmin import ShopAdmin
 from _models.User import User
 from dao.base import BaseDao
 from dao.shops import Shops
@@ -21,3 +22,12 @@ class ShopAdmins(BaseDao):
         res = sql_conn.execute(query).fetchall()
         shops = [Shops().get_shop_by_id(str(shop_id[0])) for shop_id in res]
         return shops
+
+    def check_writeble_fields(self):
+        try:
+            if len(self.get_writeble_fields()) == 0:
+                fields = [x for x in ShopAdmin().__dict__.keys() if '_id' not in x]
+                self.set_writeble_fields(fields=fields)
+                return None
+        except Exception as e:
+            return e

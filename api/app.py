@@ -6,10 +6,12 @@ from flask_bootstrap import Bootstrap5
 from flask_login import LoginManager, login_user, login_required
 from flask_toastr import Toastr
 
+from _models.Inventory import Inventory
 from _models.Product import Product
 from _models.Shop import Shop
 from _models.ShopAdmin import ShopAdmin
 from _models.User import User
+from dao.inventories import Inventories
 from dao.products import Products
 from dao.shop_admins import ShopAdmins
 from dao.shops import Shops
@@ -26,10 +28,10 @@ app.config.from_pyfile("instance/config.py")
 
 @login_manager.user_loader
 def load_user(user_id):
-    user = Users().get_user_by_username(username=user_id)
+    user = Users().get_user_by_id(user_id=user_id)
     if user is None:
         return None
-    return user if user_id == user.username else None
+    return user if user_id == user.get_id() else None
 
 
 @app.route('/')
@@ -53,7 +55,8 @@ def shop_invetory(_id):
     current_user = flask_login.current_user
     shops = ShopAdmins().get_admin_shops(current_user)
     shop = [x for x in shops if x.get_id() == int(_id)][0]
-    return render_template('shop_invnetory.html', shop=shop)
+    inventory = Shops().get_inventory(shop)
+    return render_template('shop_invnetory.html', shop=shop, inventory=inventory)
 
 
 @app.route('/shop/<_id>/edit', methods=['GET', 'POST'])
@@ -73,7 +76,8 @@ def edit_shop_id(_id):
             changes += 1
         if changes > 0:
             Shops().update_shop(shop)
-    return render_template('shop_edit.html', shop=shop)
+            Shops().check_writeble_fields()
+    return render_template('shop_edit.html', shop=shop, fields=Shops().get_writeble_fields())
 
 
 @app.route('/shop/<_id>/product/<_product_id>')
@@ -83,10 +87,15 @@ def shop_product_id(_id, _product_id):
 
 @app.route('/shop/<_id>/product/<_product_id>/edit', methods=['GET', 'POST'])
 def edit_shop_product(_id, _product_id):
+    shop = Shops().get_shop_by_id(_id)
+    product = Products().to_class_object(f'_id = {_product_id}', Product) if _product_id != 'new' else Product()
     if request.method == 'POST':
         if _product_id == 'new':
-            pass
-    return render_template('product_edit.html')
+            product = Product().from_dict(request.form)
+            res = Products().register(product)
+            res2 = Inventories().register(Inventory(product_id=Products().get_count(''), shop_id=_id, quantity=0))
+            flash(res, 'success')
+    return render_template('product_edit.html', product=product, shop=shop)
 
 
 @app.route('/profile/<_id>/edit', methods=['GET', 'POST'])

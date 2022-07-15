@@ -16,11 +16,10 @@
                 <th scope="col">Bought from</th>
                 <th scope="col">Active</th>
                 <th scope="col">Edit</th>
-                <th scope="col">Active</th>
             </tr>
         </thead>
         <tbody>
-            {% for item in shop.get_inventory() %}
+            {% for item in inventory %}
                 <tr>
                     <th scope="row">{{ item.get_id() }}</th>
                     <td>{{ item.name }}</td>
@@ -35,7 +34,7 @@
         </tbody>
     </table>
 
-        <a class="btn-success" href="/shop/{{ url_for('loja_product_id')}}">{{ item.name }}</a>
+{#        <a class="btn-success" href="/shop/{{ url_for('shop_product_id', _id=shop.get_id(), product_id=)}}">{{ item.name }}</a>#}
 
     <button class="btn-outline-success" type="button">
         <a class="btn-success" href="{{ url_for('root')}}">Home</a>
