@@ -33,9 +33,7 @@ class BaseDao:
         return sqlite3.connect(self.DATABASE)
 
     def register(self, obj: object):
-        description_list = list(obj.__dict__.keys())
-        values_list = list(obj.__dict__.values())
-        return self.insert_into_table(values_list=values_list, description_list=description_list)
+        return self.insert_into_table(values_list=obj.as_list(), description_list=obj.keys_as_list())
 
     def insert_into_table(self, values_list: list, description_list: list):
         sql_conn = self.database_get_connection()
@@ -51,6 +49,20 @@ class BaseDao:
             sql_conn.commit()
             sql_conn.close()
 
+    def delete(self, where: str):
+        sql_conn = self.database_get_connection()
+        query = f"Delete from {self.TABLE_NAME} where {where}"
+        try:
+            res = sql_conn.execute(query)
+            sql_conn.commit()
+        except Exception as e:
+            sql_conn.rollback()
+            return e
+        finally:
+            sql_conn.close()
+        return res
+
+
     def get_table_description(self):
         sql_conn = self.database_get_connection()
         query = f"select * from {self.TABLE_NAME}"
@@ -61,7 +73,7 @@ class BaseDao:
     def to_class_object(self, where: str, class_reference: object):
         sql_conn = self.database_get_connection()
         description = self.get_table_description()
-        query = f"select * from {self.TABLE_NAME} where {where};"
+        query = f"select * from {self.TABLE_NAME} where {where}"
         x = sql_conn.execute(query).fetchone()
         if x is None:
             sql_conn.close()

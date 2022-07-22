@@ -11,6 +11,7 @@ from _models.Product import Product
 from _models.Shop import Shop
 from _models.ShopAdmin import ShopAdmin
 from _models.User import User
+from blueprints.administrator import admin
 from dao.inventories import Inventories
 from dao.products import Products
 from dao.shop_admins import ShopAdmins
@@ -18,6 +19,7 @@ from dao.shops import Shops
 from dao.users import Users
 
 app = Flask(__name__)
+app.register_blueprint(admin)
 bootstrap = Bootstrap5(app)
 toastr = Toastr(app)
 login_manager = LoginManager()
@@ -37,7 +39,11 @@ def load_user(user_id):
 @app.route('/')
 def root():
     current_user = flask_login.current_user
-    return render_template('main.html', current_user=current_user)
+    shops = Shops().to_list_of_class_object('', Shop)
+    products = Inventories().to_list_of_class_object('', Inventory)[:10]
+    products = [Products().to_class_object(f"_id = '{prod.product_id}'", Product) for prod in products]
+    products = [{'id': prod.get_id(), 'image': '', 'alt': prod.name} for prod in products]
+    return render_template('main.html', current_user=current_user, shops=shops, products=products)
 
 
 @app.route('/shop/<_id>')
@@ -89,12 +95,43 @@ def shop_product_id(_id, _product_id):
 def edit_shop_product(_id, _product_id):
     shop = Shops().get_shop_by_id(_id)
     product = Products().to_class_object(f'_id = {_product_id}', Product) if _product_id != 'new' else Product()
+    if product is None:
+        return redirect(shop_invetory(_id))
     if request.method == 'POST':
-        if _product_id == 'new':
-            product = Product().from_dict(request.form)
-            res = Products().register(product)
-            res2 = Inventories().register(Inventory(product_id=Products().get_count(''), shop_id=_id, quantity=0))
-            flash(res, 'success')
+        if request.form.get('save'):
+            if _product_id == 'new':
+                product = Product().from_dict(request.form)
+                product_id = Products().get_count('') + 1 if product.get_id() == '' else product.get_id()
+                product._id = product_id
+                res = Products().register(product)
+                if res.get('error') is None:
+                    res2 = Inventories().register(Inventory(product_id=product_id, shop_id=_id, quantity=0))
+            else:
+                product = Product().from_dict(request.form)
+                res = Products().update(where=f"_id = '{_product_id}'",
+                                        updated_object=product,
+                                        class_reference=Product)
+                if res.get('error') is None:
+                    res2 = Inventories().update(where=f"product_id = '{_product_id}'",
+                                                updated_object=Inventory(product_id=product.get_id(), shop_id=_id,
+                                                                         quantity=0),
+                                                class_reference=Inventory)
+            if res.get('error'):
+                flash(res.get('error'), 'error')
+            else:
+                flash(res.get('success'), 'success')
+                return redirect(f"/shop/{_id}/product/{product.get_id()}/edit")
+        elif request.form.get('delete'):
+            res = Products().delete(f"_id = '{_product_id}'")
+            if res.get('error') is None:
+                res = Inventories().delete(f"product_id = '{_product_id}' AND shop_id = '{_id}'")
+                if res.get('error') is None:
+                    flash(res, 'success')
+                else:
+                    flash(res, 'error')
+            else:
+                flash(res, 'error')
+            return redirect(f'/shop/{_id}/inventory')
     return render_template('product_edit.html', product=product, shop=shop)
 
 

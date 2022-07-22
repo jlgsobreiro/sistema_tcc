@@ -23,7 +23,8 @@ class Shops(BaseDao):
     def get_inventory(self, shop: Shop):
         where = f"shop_id = '{shop.get_id()}'"
         products = Inventories().to_list_of_class_object(where=where, class_reference=Inventory)
-        products = [Products().to_class_object(f"_id = {prod.product_id}", Product) for prod in products]
+        products = [Products().to_class_object(f"_id = '{prod.product_id}'", Product) for prod in products]
+        products = [prod for prod in products if prod is not None]
         return products
 
     def get_shop_administrators(self, shop: Shop):
