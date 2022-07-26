@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8e066210-65c0-4cbd-8b3e-063fe91bc7a9" name="Changes" comment="Adicionando itens ao inventario">
-      <change afterPath="$PROJECT_DIR$/api/blueprints/administrator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/templates/admin/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="8e066210-65c0-4cbd-8b3e-063fe91bc7a9" name="Changes" comment="outras coisas">
+      <change afterPath="$PROJECT_DIR$/api/blueprints/api.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/schemas/orders.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/admin/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/admin/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7a4a6028-b195-4881-b0ed-7d7d514d2d68.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7a4a6028-b195-4881-b0ed-7d7d514d2d68.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/_models/Base.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/_models/Base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/_models/Inventory.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/_models/Inventory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/_models/Product.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/_models/Product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/_models/Shop.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/_models/Shop.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/_models/ShopAdmin.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/_models/ShopAdmin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/_models/User.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/_models/User.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/dao/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/dao/shops.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/shops.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/blueprints/administrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/blueprints/administrator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/api/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/api/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/templates/product_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/product_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/templates/shop_invnetory.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/shop_invnetory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/schemas/shop_administrators.sql" beforeDir="false" afterPath="$PROJECT_DIR$/api/schemas/shop_administrators.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/admin/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/admin/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/components/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/components/auth/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,6 +173,10 @@
       <workItem from="1658403415287" duration="2368000" />
       <workItem from="1658410174803" duration="644000" />
       <workItem from="1658491275031" duration="3447000" />
+      <workItem from="1658507505185" duration="34000" />
+      <workItem from="1658748194771" duration="1699000" />
+      <workItem from="1658749929411" duration="10115000" />
+      <workItem from="1658841664495" duration="2673000" />
     </task>
     <task id="LOCAL-00001" summary="token on login">
       <created>1655914283283</created>
@@ -208,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657905146613</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="outras coisas">
+      <created>1658507528562</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1658507528562</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,24 +239,15 @@
     <MESSAGE value="algumas mudanças" />
     <MESSAGE value="adicionando outras paginas" />
     <MESSAGE value="Adicionando itens ao inventario" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicionando itens ao inventario" />
+    <MESSAGE value="outras coisas" />
+    <option name="LAST_COMMIT_MESSAGE" value="outras coisas" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/api/app.py</url>
-          <line>197</line>
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/api/app.py</url>
-          <line>214</line>
-          <option name="timeStamp" value="69" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/api/app.py</url>
-          <line>63</line>
+          <line>65</line>
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -266,30 +262,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/api/app.py</url>
-          <line>122</line>
+          <line>124</line>
           <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/api/app.py</url>
-          <line>95</line>
+          <line>97</line>
           <option name="timeStamp" value="86" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/api/app.py</url>
-          <line>44</line>
-          <option name="timeStamp" value="87" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/api/app.py</url>
-          <line>42</line>
-          <option name="timeStamp" value="88" />
-        </line-breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sisteminha2$Flask__api_app_py_.coverage" NAME="Flask (api/app.py) Coverage Results" MODIFIED="1655829794604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/sistema_tcc$Flask__api_app_py_.coverage" NAME="Flask (api/app.py) Coverage Results" MODIFIED="1658404652954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/sistema_tcc$Flask__api_app_py_.coverage" NAME="Flask (api/app.py) Coverage Results" MODIFIED="1658846535670" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/sisteminha2$main.coverage" NAME="main Coverage Results" MODIFIED="1654780210573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api" />
   </component>
 </project>
