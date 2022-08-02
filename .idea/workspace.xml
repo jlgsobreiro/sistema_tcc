@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8e066210-65c0-4cbd-8b3e-063fe91bc7a9" name="Changes" comment="outras coisas">
-      <change afterPath="$PROJECT_DIR$/api/blueprints/api.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/schemas/orders.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/templates/admin/home.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/templates/admin/main.html" afterDir="false" />
+    <list default="true" id="8e066210-65c0-4cbd-8b3e-063fe91bc7a9" name="Changes" comment="adicionando template">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/7a4a6028-b195-4881-b0ed-7d7d514d2d68.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7a4a6028-b195-4881-b0ed-7d7d514d2d68.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/blueprints/administrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/blueprints/administrator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/api/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/schemas/shop_administrators.sql" beforeDir="false" afterPath="$PROJECT_DIR$/api/schemas/shop_administrators.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/templates/admin/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/admin/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/templates/components/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/components/auth/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,10 +50,11 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Project.color&quot;: &quot;612215&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/jl_so/Documents/sistema_tcc/api/schemas&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jl_so/Documents/sistema_tcc/api&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
@@ -77,6 +70,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jl_so\Documents\sistema_tcc\api" />
       <recent name="C:\Users\jl_so\Documents\sistema_tcc\api\schemas" />
       <recent name="C:\Users\jl_so\Documents\sisteminha2\api\static" />
     </key>
@@ -176,7 +170,12 @@
       <workItem from="1658507505185" duration="34000" />
       <workItem from="1658748194771" duration="1699000" />
       <workItem from="1658749929411" duration="10115000" />
-      <workItem from="1658841664495" duration="2673000" />
+      <workItem from="1658841664495" duration="2845000" />
+      <workItem from="1658925028563" duration="142000" />
+      <workItem from="1658925190328" duration="2169000" />
+      <workItem from="1659013014180" duration="250000" />
+      <workItem from="1659013356404" duration="1344000" />
+      <workItem from="1659096952850" duration="18000" />
     </task>
     <task id="LOCAL-00001" summary="token on login">
       <created>1655914283283</created>
@@ -213,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658507528562</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="adicionando template">
+      <created>1658849207788</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1658849207788</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,7 +246,8 @@
     <MESSAGE value="adicionando outras paginas" />
     <MESSAGE value="Adicionando itens ao inventario" />
     <MESSAGE value="outras coisas" />
-    <option name="LAST_COMMIT_MESSAGE" value="outras coisas" />
+    <MESSAGE value="adicionando template" />
+    <option name="LAST_COMMIT_MESSAGE" value="adicionando template" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -281,8 +288,8 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/sisteminha2$Flask__api_app_py_.coverage" NAME="Flask (api/app.py) Coverage Results" MODIFIED="1655829794604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/sistema_tcc$Flask__api_app_py_.coverage" NAME="Flask (api/app.py) Coverage Results" MODIFIED="1658846535670" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/sisteminha2$main.coverage" NAME="main Coverage Results" MODIFIED="1654780210573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api" />
+    <SUITE FILE_PATH="coverage/sistema_tcc$Flask__api_app_py_.coverage" NAME="Flask (api/app.py) Coverage Results" MODIFIED="1658846535670" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/sisteminha2$Flask__api_app_py_.coverage" NAME="Flask (api/app.py) Coverage Results" MODIFIED="1655829794604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
