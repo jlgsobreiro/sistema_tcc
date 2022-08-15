@@ -23,12 +23,12 @@
         <!-- Your page content -->
         {% block content %}{% endblock %}
 
+        {{ bootstrap.load_js() }}
+        {{ toastr.include_toastr_js() }}
+        <!--<script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
         {% block scripts %}
             <!-- Optional JavaScript -->
 
         {% endblock %}
-        {{ bootstrap.load_js() }}
-        {{ toastr.include_toastr_js() }}
-        <!--<script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
     </body>
 </html>

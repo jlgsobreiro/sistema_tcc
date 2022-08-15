@@ -1,23 +1,27 @@
 import datetime
 
 import flask_login
-from flask import Blueprint, request, flash, redirect, url_for
+from flask import Blueprint, request, flash, redirect, url_for, json
 from flask_login import login_user
 
-from _models.Product import Product
-from _models.Shop import Shop
+from _models.Administrador import Administrador
+from _models.Produto import Produto
+from _models.Lojas import Lojas
 from _models.ShopAdmin import ShopAdmin
-from _models.User import User
-from dao.products import Products
+from _models.Usuario import Usuario
+from dao.administradores import Administradores
+from dao.fornecedores import FornecedoresDAO
+from dao.produtos import Products
 from dao.shop_admins import ShopAdmins
-from dao.shops import Shops
-from dao.users import Users
+from dao.lojas import Lojas
+from dao.usuarios import Usuarios
+import uuid
 
 api = Blueprint('api', __name__)
 
 
 def api_auth(username, password):
-    res = Users().login(username=username, password=password)
+    res = Usuarios().login(username=username, password=password)
     user = res.get('user')
     if user is not None:
         try:
@@ -32,7 +36,6 @@ def api_auth(username, password):
     return {'auth': 'success'}
 
 
-@api.route('/', defaults={'page': 'index'})
 @api.route('/api/login', methods=['POST'])
 def api_login():
     username = ''
@@ -55,13 +58,13 @@ def api_adm_login():
             return redirect(url_for('admin.adm_home'))
 
 
-@api.route('/api/register_shop', methods=['POST'])
+@api.route('/api/registra_loja', methods=['POST', 'GET'])
 def api_register_shop():
     if request.method == 'POST':
         shop_name = request.form.get('name')
         shop_adress = request.form.get('address')
-        shop_id = Shops().get_count('') + 1
-        res = Shops().register(Shop(_id=shop_id, name=shop_name, address=shop_adress))
+        shop_id = Lojas().get_count('') + 1
+        res = Lojas().register(Lojas(_id=shop_id, name=shop_name, address=shop_adress))
         res_adm = ShopAdmins().register(ShopAdmin().from_dict(
             {'user_id': flask_login.current_user.get_id(), 'shop_id': shop_id, 'status': 'active'}))
         if res.get('error') is not None or res_adm.get('error') is not None:
@@ -71,7 +74,20 @@ def api_register_shop():
     return redirect(url_for('profile_id_edit', _id=flask_login.current_user.username))
 
 
-@api.route('/api/register_product', methods=['POST'])
+@api.route('/api/registra_conta', methods=['POST'])
+def api_registra_conta():
+    return
+
+
+@api.route('/api/fornecedores_lista', methods=['POST'])
+def api_fornecedores_lista():
+    lista_fornecedores = FornecedoresDAO().lista_fornecedores()
+    lista_fornecedores += ['teste','teste1']
+    res = json.dumps({"res": lista_fornecedores})
+    return res
+
+
+@api.route('/api/registra_produto', methods=['POST'])
 def api_register_product():
     if request.method == 'POST':
         product_name = request.form.get('name')
@@ -81,7 +97,7 @@ def api_register_product():
         barcode = request.form.get('barcode')
         bought_from = request.form.get('bought_from')
         product_id = Products().get_count('') + 1
-        product = Product(_id=product_id, name=product_name, unity_type=unity_type, selling_price=selling_price,
+        product = Produto(_id=product_id, name=product_name, unity_type=unity_type, selling_price=selling_price,
                           cost_price=cost_price, barcode=barcode, bought_from=bought_from)
         res = Products().register(product)
         if res.get('error') is not None:
@@ -91,8 +107,8 @@ def api_register_product():
     return redirect(url_for('edit_shop_product', _id=flask_login.current_user.username))
 
 
-@api.route('/api/register', methods=['GET', 'POST'])
-def api_register():
+@api.route('/api/registrar', methods=['GET', 'POST'])
+def register():
     username = request.form.get('username')
     password = request.form.get('password')
     first_name = request.form.get('firstname')
@@ -100,19 +116,21 @@ def api_register():
     email = request.form.get('email')
     repassword = request.form.get('repassword')
     if username is None or password is None or first_name is None or last_name is None or email is None or repassword is None:
-        flash("missing info", 'error')
+        flash("Dados não informados", 'error')
     elif password != repassword:
-        flash("Password not matching", 'error')
+        flash("Senhas não conferem", 'error')
     else:
-        _id = Users().get_count(where='') + 1
-        res = Users().register(
-            User(_id=_id, username=username, password=password, email=email, firstname=first_name, lastname=last_name))
+        usuario = Usuario(_id=str(uuid.uuid4()), usuario=username, senha=password, email=email, nome=first_name, sobrenome=last_name)
+        res = Usuarios().register(usuario)
         if res.get('error'):
             flash(str(res.get('error')), 'error')
-            return redirect('/login')
-        elif res.get('token'):
+            # return redirect('/register')
+        elif res.get('message') == 'Success':
             flash('Registrado com sucesso', 'success')
-    return redirect('/')
+            if Administradores().get_count('') == 0:
+                Administradores().register(Administrador(usuario_id=usuario.get_id(), acesso='total', condicao='ativo'))
+            return redirect(url_for('root'))
+        return redirect(url_for('register_screen'))
 
 
 @api.route('/api/logout', methods=['GET', 'POST'])

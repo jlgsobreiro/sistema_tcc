@@ -1,7 +1,7 @@
 from _models.ShopAdmin import ShopAdmin
-from _models.User import User
+from _models.Usuario import Usuario
 from dao.base import BaseDao
-from dao.shops import Shops
+from dao.lojas import Lojas
 
 
 class ShopAdmins(BaseDao):
@@ -9,18 +9,18 @@ class ShopAdmins(BaseDao):
         super().__init__()
         self.TABLE_NAME = 'Shop_Administrators'
 
-    def is_shop_admin(self, admin: User):
+    def is_shop_admin(self, admin: Usuario):
         sql_conn = self.database_get_connection()
         query = f"select count(*) from Shop_Administrators where user_id = '{admin.get_id()}' AND status = 'active'"
         res = sql_conn.execute(query).fetchone()[0]
         is_admin = True if res != 0 else False
         return is_admin
 
-    def get_admin_shops(self, admin: User):
+    def get_admin_shops(self, admin: Usuario):
         sql_conn = self.database_get_connection()
         query = f"select shop_id from Shop_Administrators where user_id = '{admin.get_id()}' AND status = 'active'"
         res = sql_conn.execute(query).fetchall()
-        shops = [Shops().get_shop_by_id(str(shop_id[0])) for shop_id in res]
+        shops = [Lojas().get_shop_by_id(str(shop_id[0])) for shop_id in res]
         return shops
 
     def check_writeble_fields(self):

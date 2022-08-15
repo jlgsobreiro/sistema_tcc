@@ -9,8 +9,7 @@ admin = Blueprint('admin', __name__,
                   template_folder='../templates')
 
 
-@admin.route('/', defaults={'page': 'index'})
-@admin.route('/admin/home')
+@admin.route('/admin')
 @login_required
 def adm_home():
     try:
@@ -19,7 +18,7 @@ def adm_home():
         abort(404)
 
 
-@admin.route('/admin/main')
+@admin.route('/admin/principal')
 @login_required
 def adm_main():
     try:

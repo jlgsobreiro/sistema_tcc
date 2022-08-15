@@ -2,7 +2,7 @@
 {% from 'components/auth/register.html' import register_shop %}
 {% block content %}
 <h1>Create Shop</h1>
-    <form action="/api/register_shop" method="post" class="text-center">
+    <form action="{{ url_for('api.api_register_shop') }}" method="post" class="text-center">
         <div class="mb-3">
           <label for="shp_name" class="form-label">Shop name</label>
           <input name="name" type="text" class="form-control" id="shp_name" placeholder="Heisenberg">

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block tittle %}Home Clientes{% endblock %}
+{% block content %}
+    {% for cliente in clientes %}
+        <div>
+            {{ cliente.get_id() }} - {{ cliente.name }}
+        </div>
+    {% endfor %}
+    <H1>Hello Main!</H1>
+{% endblock %}

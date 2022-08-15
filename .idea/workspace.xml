@@ -1,11 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8e066210-65c0-4cbd-8b3e-063fe91bc7a9" name="Changes" comment="adicionando template">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="8e066210-65c0-4cbd-8b3e-063fe91bc7a9" name="Changes" comment="removendo template">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/jl_so.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/_models/Administrador.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/_models/Fornecedor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/_models/Insumos.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/_models/Lojas.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/blueprints/clientes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/blueprints/contas.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/blueprints/estoque.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/blueprints/insumos.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/blueprints/pedidos.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/blueprints/produto.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/blueprints/usuarios.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/dao/administradores.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/dao/contas.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/dao/fornecedores.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/schemas/administradores.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/schemas/contas.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/schemas/estoque.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/schemas/loja.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/schemas/pedidos.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/schemas/photos.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/schemas/produtos.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/schemas/usuarios.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/admin/clientes/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/admin/contas/contas.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/admin/contas/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/admin/estoque/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/admin/insumos/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/admin/pedidos/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/admin/produtos/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/admin/usuarios/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/components/scripts/contas.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/components/scripts/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/templates/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/7a4a6028-b195-4881-b0ed-7d7d514d2d68.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7a4a6028-b195-4881-b0ed-7d7d514d2d68.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/_models/Inventory.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/_models/Estoque.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/_models/Product.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/_models/Produto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/_models/Shop.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/_models/Conta.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/_models/User.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/_models/Usuario.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/blueprints/administrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/blueprints/administrador.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/blueprints/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/blueprints/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/dao/inventories.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/estoque.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/dao/products.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/produtos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/dao/shop_admins.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/shop_admins.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/dao/shops.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/lojas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/dao/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/dao/usuarios.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/api/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/api/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/schemas/inventory.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/schemas/orders.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/schemas/products.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/schemas/shop_administrators.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/schemas/shops.sql" beforeDir="false" afterPath="$PROJECT_DIR$/api/schemas/fornecedores.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/schemas/users.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/admin/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/admin/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/components/assets/nav-bar.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/components/assets/nav-bar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/components/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/components/auth/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/components/auth/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/components/auth/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/create_shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/create_shop.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/admin/produtos/product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/product_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/admin/produtos/product_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/profile_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/profile_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/templates/shop_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/templates/shop_edit.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,9 +82,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="HTML File" />
         <option value="Python Script" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -53,13 +117,14 @@
     &quot;Project.color&quot;: &quot;612215&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/jl_so/Documents/sistema_tcc/api&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jl_so/Documents/sistema_tcc/api/dao&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;proofread&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\jl_so\\Documents\\sisteminha2\\client\\node_modules\\typescript\\lib&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -70,21 +135,24 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\jl_so\Documents\sistema_tcc\api" />
+      <recent name="C:\Users\jl_so\Documents\sistema_tcc\api\dao" />
       <recent name="C:\Users\jl_so\Documents\sistema_tcc\api\schemas" />
-      <recent name="C:\Users\jl_so\Documents\sisteminha2\api\static" />
+      <recent name="C:\Users\jl_so\Documents\sistema_tcc\api\_models" />
+      <recent name="C:\Users\jl_so\Documents\sistema_tcc\api\blueprints" />
+      <recent name="C:\Users\jl_so\Documents\sistema_tcc\api" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jl_so\Documents\sistema_tcc\api\templates\components\scripts" />
+      <recent name="C:\Users\jl_so\Documents\sistema_tcc\api\templates\admin\produtos" />
+      <recent name="C:\Users\jl_so\Documents\sistema_tcc\api\templates\admin" />
       <recent name="C:\Users\jl_so\Documents\sisteminha2\api\templates\components\scripts" />
       <recent name="C:\Users\jl_so\Documents\sisteminha2\api\templates\components\auth" />
-      <recent name="C:\Users\jl_so\Documents\sisteminha2\api\templates\components" />
-      <recent name="C:\Users\jl_so\Documents\sisteminha2\api\templates" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="Flask (api/app.py)" type="Python.FlaskServer" nameIsGenerated="true">
       <option name="flaskDebug" value="true" />
-      <module name="sisteminha2" />
+      <module name="api" />
       <option name="target" value="C:\Users\jl_so\Documents\sistema_tcc\api\app.py" />
       <option name="targetType" value="PATH" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -176,6 +244,19 @@
       <workItem from="1659013014180" duration="250000" />
       <workItem from="1659013356404" duration="1344000" />
       <workItem from="1659096952850" duration="18000" />
+      <workItem from="1659440365686" duration="498000" />
+      <workItem from="1659440951082" duration="646000" />
+      <workItem from="1659530232892" duration="8759000" />
+      <workItem from="1659614482491" duration="4524000" />
+      <workItem from="1659699316839" duration="8648000" />
+      <workItem from="1659958066652" duration="8868000" />
+      <workItem from="1660043657886" duration="6943000" />
+      <workItem from="1660054325861" duration="1193000" />
+      <workItem from="1660130739256" duration="12320000" />
+      <workItem from="1660220977575" duration="3303000" />
+      <workItem from="1660306844523" duration="4906000" />
+      <workItem from="1660563743184" duration="138000" />
+      <workItem from="1660563898233" duration="9555000" />
     </task>
     <task id="LOCAL-00001" summary="token on login">
       <created>1655914283283</created>
@@ -219,7 +300,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658849207788</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="removendo template">
+      <created>1659440744038</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1659440744038</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,18 +335,19 @@
     <MESSAGE value="Adicionando itens ao inventario" />
     <MESSAGE value="outras coisas" />
     <MESSAGE value="adicionando template" />
-    <option name="LAST_COMMIT_MESSAGE" value="adicionando template" />
+    <MESSAGE value="removendo template" />
+    <option name="LAST_COMMIT_MESSAGE" value="removendo template" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/api/app.py</url>
-          <line>65</line>
+          <line>81</line>
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/api/dao/shops.py</url>
+          <url>file://$PROJECT_DIR$/api/dao/lojas.py</url>
           <line>24</line>
           <option name="timeStamp" value="76" />
         </line-breakpoint>
@@ -268,14 +357,34 @@
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/api/app.py</url>
-          <line>124</line>
-          <option name="timeStamp" value="83" />
+          <url>file://$PROJECT_DIR$/api/blueprints/api.py</url>
+          <line>111</line>
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api/dao/administradores.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api/blueprints/api.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api/blueprints/api.py</url>
+          <line>68</line>
+          <option name="timeStamp" value="91" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/api/app.py</url>
-          <line>97</line>
-          <option name="timeStamp" value="86" />
+          <line>62</line>
+          <option name="timeStamp" value="92" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api/blueprints/api.py</url>
+          <line>83</line>
+          <option name="timeStamp" value="93" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -289,7 +398,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sisteminha2$main.coverage" NAME="main Coverage Results" MODIFIED="1654780210573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api" />
-    <SUITE FILE_PATH="coverage/sistema_tcc$Flask__api_app_py_.coverage" NAME="Flask (api/app.py) Coverage Results" MODIFIED="1658846535670" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/sistema_tcc$Flask__api_app_py_.coverage" NAME="Flask (api/app.py) Coverage Results" MODIFIED="1660574230353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/sisteminha2$Flask__api_app_py_.coverage" NAME="Flask (api/app.py) Coverage Results" MODIFIED="1655829794604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block tittle %}Home Contas{% endblock %}
+{% block content %}
+    <a role="button" class="btn btn-success" href="{{ url_for('root')}}">Inicio</a>
+    <form method="post" class="form-control" action="{{ url_for('api.api_registra_conta')}}">
+        <div class="form-control">
+            <label for="empresa">Empresa</label>
+            <input name="empresa" id="empresa" class="form-control me-1" autocomplete="on">
+            <label for="valor">Valor</label>
+            <input name="valor" id="valor" class="form-control me-1">
+            <label for="vencimento">Vencimento</label>
+            <input name="vencimento" id="vencimento" class="form-control me-1">
+            <label for="juros">Juros</label>
+            <input name="juros" id="juros" class="form-control me-1">
+            <label for="multa">Multa</label>
+            <input name="multa" id="multa" class="form-control me-1">
+            <label for="emissao">Emissão</label>
+            <input name="emissao" id="emissao" class="form-control me-1">
+        </div>
+        <div>
+            <a role="button" class="btn btn-success" name="save" value="save" type="submit">Salvar</a>
+        </div>
+    </form>
+    <H1>Hello Main!</H1>
+{% endblock %}
+{% block scripts %}
+    <script src="components/scripts/contas.js"></script>
+{% endblock %}

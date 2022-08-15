@@ -1284,263 +1284,311 @@
     <argument id="472" parent="162">
       <Position>1</Position>
     </argument>
-    <table id="473" parent="163" name="Inventory"/>
-    <table id="474" parent="163" name="Orders"/>
-    <table id="475" parent="163" name="Products"/>
-    <table id="476" parent="163" name="Shop_Administrators"/>
-    <table id="477" parent="163" name="Shops"/>
-    <table id="478" parent="163" name="Users"/>
-    <table id="479" parent="163" name="Writeble_Fields"/>
+    <table id="473" parent="163" name="Administradores"/>
+    <table id="474" parent="163" name="Estoque"/>
+    <table id="475" parent="163" name="Fornecedores"/>
+    <table id="476" parent="163" name="Loja"/>
+    <table id="477" parent="163" name="Pedidos"/>
+    <table id="478" parent="163" name="Produtos"/>
+    <table id="479" parent="163" name="Usuarios"/>
     <table id="480" parent="163" name="sqlite_master">
       <System>1</System>
     </table>
     <table id="481" parent="163" name="sqlite_sequence">
       <System>1</System>
     </table>
-    <column id="482" parent="473" name="product_id">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
+    <column id="482" parent="473" name="usuario_id">
       <Position>1</Position>
     </column>
-    <column id="483" parent="473" name="shop_id">
-      <DataType>text|0s</DataType>
+    <column id="483" parent="473" name="acesso">
+      <DataType>blob|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="484" parent="473" name="quantity">
-      <DataType>real|0s</DataType>
+    <column id="484" parent="473" name="condicao">
+      <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
     <foreign-key id="485" parent="473">
-      <ColNames>product_id</ColNames>
+      <ColNames>usuario_id</ColNames>
+      <RefColNames>usuario</RefColNames>
+      <RefTableName>Usuarios</RefTableName>
+    </foreign-key>
+    <column id="486" parent="474" name="produto_id">
+      <Position>1</Position>
+    </column>
+    <column id="487" parent="474" name="loja_id">
+      <Position>2</Position>
+    </column>
+    <column id="488" parent="474" name="quantidade">
+      <DataType>real|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <foreign-key id="489" parent="474">
+      <ColNames>produto_id</ColNames>
       <RefColNames>_id</RefColNames>
       <RefTableName>Products</RefTableName>
     </foreign-key>
-    <foreign-key id="486" parent="473">
-      <ColNames>shop_id</ColNames>
+    <foreign-key id="490" parent="474">
+      <ColNames>loja_id</ColNames>
       <RefColNames>_id</RefColNames>
       <RefTableName>Shops</RefTableName>
     </foreign-key>
-    <column id="487" parent="474" name="product_id">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="488" parent="474" name="quantity">
-      <DataType>real|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="489" parent="474" name="observations">
-      <DataType>text|0s</DataType>
-      <Position>3</Position>
-    </column>
-    <column id="490" parent="474" name="images">
-      <DataType>blob|0s</DataType>
-      <Position>4</Position>
-    </column>
-    <foreign-key id="491" parent="474">
-      <ColNames>product_id</ColNames>
-      <RefColNames>_id</RefColNames>
-      <RefTableName>Products</RefTableName>
-    </foreign-key>
-    <column id="492" parent="475" name="_id">
+    <column id="491" parent="475" name="_id">
       <AutoIncrement>1</AutoIncrement>
       <DataType>integer|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="493" parent="475" name="name">
+    <column id="492" parent="475" name="nome">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="494" parent="475" name="unity_type">
+    <column id="493" parent="475" name="endereco">
       <DataType>text|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="494" parent="475" name="condicao">
+      <DataType>blob|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <index id="495" parent="475" name="sqlite_autoindex_Fornecedores_1">
+      <ColNames>nome</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="496" parent="475">
+      <ColNames>_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="497" parent="475">
+      <ColNames>nome</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_Fornecedores_1</UnderlyingIndexName>
+    </key>
+    <column id="498" parent="476" name="_id">
+      <AutoIncrement>1</AutoIncrement>
+      <DataType>integer|0s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="499" parent="476" name="nome">
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="500" parent="476" name="endereco">
+      <DataType>text|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="501" parent="476" name="cnpj">
+      <DataType>text|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="502" parent="476" name="telefone">
+      <DataType>text|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <index id="503" parent="476" name="sqlite_autoindex_Loja_1">
+      <ColNames>nome</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="504" parent="476">
+      <ColNames>_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="505" parent="476">
+      <ColNames>nome</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_Loja_1</UnderlyingIndexName>
+    </key>
+    <column id="506" parent="477" name="usuario_id">
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="507" parent="477" name="produto_id">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="508" parent="477" name="quantidade">
+      <DataType>blob|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="495" parent="475" name="selling_price">
-      <DataType>real|0s</DataType>
+    <column id="509" parent="477" name="valor_un">
+      <DataType>blob|0s</DataType>
+      <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="496" parent="475" name="cost_price">
-      <DataType>real|0s</DataType>
+    <column id="510" parent="477" name="desconto">
+      <DataType>blob|0s</DataType>
+      <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="497" parent="475" name="barcode">
-      <DataType>text|0s</DataType>
+    <column id="511" parent="477" name="total">
+      <DataType>blob|0s</DataType>
+      <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="498" parent="475" name="active">
+    <column id="512" parent="477" name="data_pedido">
       <DataType>blob|0s</DataType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="499" parent="475" name="bought_from">
-      <DataType>int|0s</DataType>
+    <column id="513" parent="477" name="data_baixa">
+      <DataType>blob|0s</DataType>
       <Position>8</Position>
     </column>
-    <foreign-key id="500" parent="475">
-      <ColNames>bought_from</ColNames>
+    <column id="514" parent="477" name="condicao">
+      <DataType>BLOB|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>9</Position>
+    </column>
+    <foreign-key id="515" parent="477">
+      <ColNames>usuario_id</ColNames>
       <RefColNames>_id</RefColNames>
-      <RefTableName>Shops</RefTableName>
-    </foreign-key>
-    <key id="501" parent="475">
-      <ColNames>_id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="502" parent="476" name="shop_id">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="503" parent="476" name="user_id">
-      <DataType>text|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="504" parent="476" name="access_level">
-      <DataType>text|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <column id="505" parent="476" name="status">
-      <DataType>text|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-    </column>
-    <foreign-key id="506" parent="476">
-      <ColNames>shop_id</ColNames>
-      <RefColNames>_id</RefColNames>
-      <RefTableName>Shops</RefTableName>
-    </foreign-key>
-    <foreign-key id="507" parent="476">
-      <ColNames>user_id</ColNames>
-      <RefColNames>username</RefColNames>
       <RefTableName>Users</RefTableName>
     </foreign-key>
-    <column id="508" parent="477" name="_id">
+    <foreign-key id="516" parent="477">
+      <ColNames>produto_id</ColNames>
+      <RefColNames>_id</RefColNames>
+      <RefTableName>Products</RefTableName>
+    </foreign-key>
+    <column id="517" parent="478" name="_id">
       <AutoIncrement>1</AutoIncrement>
       <DataType>integer|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="509" parent="477" name="name">
+    <column id="518" parent="478" name="nome">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="510" parent="477" name="address">
+    <column id="519" parent="478" name="unidade">
       <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="511" parent="477" name="active">
-      <DataType>blob|0s</DataType>
-      <NotNull>1</NotNull>
+    <column id="520" parent="478" name="valor">
+      <DataType>real|0s</DataType>
       <Position>4</Position>
     </column>
-    <index id="512" parent="477" name="sqlite_autoindex_Shops_1">
-      <ColNames>name</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <Unique>1</Unique>
-    </index>
-    <key id="513" parent="477">
+    <column id="521" parent="478" name="custo">
+      <DataType>real|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="522" parent="478" name="codigo_de_barras">
+      <DataType>text|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <column id="523" parent="478" name="active">
+      <DataType>blob|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+    </column>
+    <column id="524" parent="478" name="origem">
+      <Position>8</Position>
+    </column>
+    <foreign-key id="525" parent="478">
+      <ColNames>origem</ColNames>
+      <RefColNames>_id</RefColNames>
+      <RefTableName>Fornecedores</RefTableName>
+    </foreign-key>
+    <key id="526" parent="478">
       <ColNames>_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="514" parent="477">
-      <ColNames>name</ColNames>
-      <UnderlyingIndexName>sqlite_autoindex_Shops_1</UnderlyingIndexName>
-    </key>
-    <column id="515" parent="478" name="_id">
-      <AutoIncrement>1</AutoIncrement>
-      <DataType>integer|0s</DataType>
+    <column id="527" parent="479" name="_id">
+      <DataType>text|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="516" parent="478" name="username">
+    <column id="528" parent="479" name="usuario">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="517" parent="478" name="passwordHash">
+    <column id="529" parent="479" name="senhaHash">
       <DataType>blob|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="518" parent="478" name="firstname">
+    <column id="530" parent="479" name="nome">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="519" parent="478" name="lastname">
+    <column id="531" parent="479" name="sobrenome">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="520" parent="478" name="email">
+    <column id="532" parent="479" name="email">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="521" parent="478" name="active">
-      <DataType>BLOB|0s</DataType>
-      <NotNull>1</NotNull>
+    <column id="533" parent="479" name="telefone">
+      <DataType>text|0s</DataType>
       <Position>7</Position>
     </column>
-    <index id="522" parent="478" name="sqlite_autoindex_Users_1">
-      <ColNames>username</ColNames>
+    <column id="534" parent="479" name="condicao">
+      <DataType>BLOB|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>8</Position>
+    </column>
+    <index id="535" parent="479" name="sqlite_autoindex_Usuarios_1">
+      <ColNames>_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="523" parent="478" name="sqlite_autoindex_Users_2">
+    <index id="536" parent="479" name="sqlite_autoindex_Usuarios_2">
+      <ColNames>usuario</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="537" parent="479" name="sqlite_autoindex_Usuarios_3">
       <ColNames>email</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="524" parent="478">
+    <key id="538" parent="479">
       <ColNames>_id</ColNames>
       <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_Usuarios_1</UnderlyingIndexName>
     </key>
-    <key id="525" parent="478">
-      <ColNames>username</ColNames>
-      <UnderlyingIndexName>sqlite_autoindex_Users_1</UnderlyingIndexName>
+    <key id="539" parent="479">
+      <ColNames>usuario</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_Usuarios_2</UnderlyingIndexName>
     </key>
-    <key id="526" parent="478">
+    <key id="540" parent="479">
       <ColNames>email</ColNames>
-      <UnderlyingIndexName>sqlite_autoindex_Users_2</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_Usuarios_3</UnderlyingIndexName>
     </key>
-    <column id="527" parent="479" name="table_name">
+    <column id="541" parent="480" name="type">
       <DataType>text|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="528" parent="479" name="field_name">
+    <column id="542" parent="480" name="name">
       <DataType>text|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="529" parent="480" name="type">
-      <DataType>text|0s</DataType>
-      <Position>1</Position>
-    </column>
-    <column id="530" parent="480" name="name">
-      <DataType>text|0s</DataType>
-      <Position>2</Position>
-    </column>
-    <column id="531" parent="480" name="tbl_name">
+    <column id="543" parent="480" name="tbl_name">
       <DataType>text|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="532" parent="480" name="rootpage">
+    <column id="544" parent="480" name="rootpage">
       <DataType>int|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="533" parent="480" name="sql">
+    <column id="545" parent="480" name="sql">
       <DataType>text|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="534" parent="481" name="name">
+    <column id="546" parent="481" name="name">
       <Position>1</Position>
     </column>
-    <column id="535" parent="481" name="seq">
+    <column id="547" parent="481" name="seq">
       <Position>2</Position>
     </column>
   </database-model>

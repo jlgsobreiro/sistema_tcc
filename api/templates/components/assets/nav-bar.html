@@ -1,5 +1,5 @@
 {% from 'components/auth/login.html' import nav_login, nav_logout %}
-{% macro nav_bar(current_user) %}
+{% macro nav_bar(current_user,is_admin) %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
@@ -10,10 +10,11 @@
             <div class="btn-group dropstart">
                 <ol class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ current_user.username }}
+                        {{ current_user.usuario }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/profile/{{ current_user.username }}/edit">Edit</a></li>
+                        {% if is_admin %}<li><a class="dropdown-item" href="{{ url_for('admin.adm_home') }}">Admin</a></li>{% endif %}
+                        <li><a class="dropdown-item" href="{{ url_for('profile_id_edit') }}">Edit</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">{{ nav_logout() }}</a></li>
                     </ul>

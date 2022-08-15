@@ -3,6 +3,29 @@
 {% from 'components/assets/nav-bar.html' import nav_bar %}
 {% block tittle %}Main{% endblock %}
 {% block content %}
-    {{ nav_bar(current_user) }}
+    {% if no_admin %}
+        <div class="modal fade" id="admin_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Novo Administrador</h5>
+              </div>
+              <div class="modal-body">
+                  Bem vinda(o), o primeiro usuario a ser registrado será o administrador do seu sistema.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% block scripts %}
+            <script>
+              var modal = new bootstrap.Modal(document.getElementById('admin_modal'));
+              modal.show();
+            </script>
+        {% endblock %}
+    {% endif %}
+    {{ nav_bar(current_user,is_admin) }}
     {{ carousel(products) }}
 {% endblock %}
