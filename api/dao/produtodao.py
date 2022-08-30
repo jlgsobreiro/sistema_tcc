@@ -2,10 +2,10 @@ from _models.Produto import Produto
 from dao.base import BaseDao
 
 
-class Products(BaseDao):
+class ProdutoDAO(BaseDao):
     def __init__(self):
         super().__init__()
-        self.TABLE_NAME = 'Products'
+        self.TABLE_NAME = 'Produtos'
 
     def check_writeble_fields(self):
         try:

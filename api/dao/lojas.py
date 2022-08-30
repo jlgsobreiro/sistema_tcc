@@ -4,7 +4,7 @@ from _models.Lojas import Lojas
 from _models.Usuario import Usuario
 from dao.base import BaseDao
 from dao.estoque import Estoque
-from dao.produtos import Products
+from dao.produtodao import ProdutoDAO
 
 
 class Lojas(BaseDao):
@@ -23,7 +23,7 @@ class Lojas(BaseDao):
     def get_inventory(self, shop: Lojas):
         where = f"shop_id = '{shop.get_id()}'"
         products = Estoque().to_list_of_class_object(where=where, class_reference=Estoque)
-        products = [Products().to_class_object(f"_id = '{prod.product_id}'", Produto) for prod in products]
+        products = [ProdutoDAO().to_class_object(f"_id = '{prod.product_id}'", Produto) for prod in products]
         products = [prod for prod in products if prod is not None]
         return products
 

@@ -10,7 +10,6 @@ class Produto(Base):
         self.custo = kwargs.get('custo')
         self.codigo_de_barras = kwargs.get('codigo_de_barras')
         self.origem = kwargs.get('origem')
-        self.insumo = kwargs.get('insumo')
         self.active = True
 
     def get_id(self):

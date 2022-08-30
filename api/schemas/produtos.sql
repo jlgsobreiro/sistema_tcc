@@ -1,5 +1,5 @@
 create table if not exists Produtos (
-    _id integer primary key autoincrement,
+    _id text primary key,
     nome text not null,
     unidade text not null,
     valor real,

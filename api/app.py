@@ -1,7 +1,7 @@
 import datetime
 
 import flask_login
-from flask import Flask, request, render_template, flash, redirect, url_for
+from flask import Flask, request, render_template, flash, redirect, url_for, send_from_directory
 from flask_bootstrap import Bootstrap5
 from flask_login import LoginManager, login_user, login_required
 from flask_toastr import Toastr
@@ -22,12 +22,14 @@ from blueprints.api import api
 from blueprints.usuarios import usuarios
 from dao.administradores import Administradores
 from dao.estoque import Estoque, EstoqueDAO
-from dao.produtos import Products
+from dao.produtodao import ProdutoDAO
 from dao.shop_admins import ShopAdmins
 from dao.lojas import Lojas
 from dao.usuarios import Usuarios
+from flask_material import Material
 
 app = Flask(__name__)
+app.config.from_pyfile("instance/config.py")
 app.register_blueprint(admin)
 app.register_blueprint(api)
 app.register_blueprint(produto)
@@ -39,10 +41,9 @@ app.register_blueprint(pedidos)
 app.register_blueprint(usuarios)
 bootstrap = Bootstrap5(app)
 toastr = Toastr(app)
+Material(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-app.config.from_pyfile("instance/config.py")
 
 
 @login_manager.user_loader
@@ -56,8 +57,8 @@ def load_user(user_id):
 @app.route('/', methods=['GET', 'POST'])
 def root():
     current_user = flask_login.current_user
-    products = EstoqueDAO().to_list_of_class_object('', Estoque)[:10]
-    products = [Products().to_class_object(f"_id = '{prod.product_id}'", Produto) for prod in products]
+    products = ProdutoDAO().to_list_of_class_object('', Produto)[:10]
+    products = [ProdutoDAO().to_class_object(f"_id = '{prod.get_id()}'", Produto) for prod in products]
     products = [{'id': prod.get_id(), 'image': '', 'alt': prod.nome} for prod in products]
     no_admin = Administradores().get_count('') == 0
     is_admin = Administradores().check_access(current_user)

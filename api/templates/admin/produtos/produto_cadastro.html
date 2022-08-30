@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post" class="form-control" action="{{ url_for('produto.cadastrar') }}">
+        <div class="form-control">
+            <div>{{ form.label_nome }} {{ form.nome(class_='form-control me-1') }}</div>
+            <div>{{ form.label_valor }} {{ form.valor(class_='form-control me-1') }}</div>
+            <div>{{ form.label_custo }} {{ form.custo(class_='form-control me-1') }}</div>
+            <div>{{ form.label_codigo_de_barras }} {{ form.codigo_de_barras(class_='form-control me-1') }}</div>
+            <div>{{ form.label_origem }} {{ form.origem(class_='form-control me-1') }}</div>
+            <div>{{ form.label_unidade }} {{ form.unidade(class_='form-control me-1') }}</div>
+            <div>{{ form.label_quantidade }} {{ form.quantidade(class_='form-control me-1') }}</div>
+            <div>{{ form.label_condicao(_class='form-check-label') }} {{ form.condicao(class_='form-check-input') }}</div>
+            <br>
+            <button class="btn btn-success" name="save" type="submit">Save changes</button>
+            <button class="btn btn-success" name="delete" type="submit">Delete</button>
+        </div>
+    </form>
+    <a role="button" class="btn btn-success" href="{{ url_for('root')}}">Home</a>
+{% endblock %}

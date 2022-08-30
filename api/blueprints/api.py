@@ -1,7 +1,7 @@
 import datetime
 
 import flask_login
-from flask import Blueprint, request, flash, redirect, url_for, json
+from flask import Blueprint, request, flash, redirect, url_for, json, jsonify
 from flask_login import login_user
 
 from _models.Administrador import Administrador
@@ -11,7 +11,7 @@ from _models.ShopAdmin import ShopAdmin
 from _models.Usuario import Usuario
 from dao.administradores import Administradores
 from dao.fornecedores import FornecedoresDAO
-from dao.produtos import Products
+from dao.produtodao import ProdutoDAO
 from dao.shop_admins import ShopAdmins
 from dao.lojas import Lojas
 from dao.usuarios import Usuarios
@@ -76,14 +76,16 @@ def api_register_shop():
 
 @api.route('/api/registra_conta', methods=['POST'])
 def api_registra_conta():
-    return
+    print(request.form)
+    return redirect(url_for('contas.main'))
 
 
 @api.route('/api/fornecedores_lista', methods=['POST'])
 def api_fornecedores_lista():
     lista_fornecedores = FornecedoresDAO().lista_fornecedores()
-    lista_fornecedores += ['teste','teste1']
-    res = json.dumps({"res": lista_fornecedores})
+    lista_fornecedores += ['teste', 'teste1']
+    res = jsonify(lista_fornecedores)
+    print(res)
     return res
 
 
@@ -96,10 +98,10 @@ def api_register_product():
         cost_price = request.form.get('cost_price')
         barcode = request.form.get('barcode')
         bought_from = request.form.get('bought_from')
-        product_id = Products().get_count('') + 1
+        product_id = ProdutoDAO().get_count('') + 1
         product = Produto(_id=product_id, name=product_name, unity_type=unity_type, selling_price=selling_price,
                           cost_price=cost_price, barcode=barcode, bought_from=bought_from)
-        res = Products().register(product)
+        res = ProdutoDAO().register(product)
         if res.get('error') is not None:
             flash(str(res.get('error')), 'error')
         else:
@@ -120,7 +122,8 @@ def register():
     elif password != repassword:
         flash("Senhas não conferem", 'error')
     else:
-        usuario = Usuario(_id=str(uuid.uuid4()), usuario=username, senha=password, email=email, nome=first_name, sobrenome=last_name)
+        usuario = Usuario(_id=str(uuid.uuid4()), usuario=username, senha=password, email=email, nome=first_name,
+                          sobrenome=last_name)
         res = Usuarios().register(usuario)
         if res.get('error'):
             flash(str(res.get('error')), 'error')

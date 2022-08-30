@@ -6,3 +6,5 @@ flask_toastr
 flask_modals
 
 Jinja2~=3.1.2
+
+WTForms~=3.0.1
