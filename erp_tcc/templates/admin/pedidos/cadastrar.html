@@ -1,0 +1,57 @@
+{% extends 'material/base.html' %}
+{% from 'base.html' import toastr %}
+{{ toastr() }}
+{% block content %}
+    <a role="button" class="btn btn-success" href="{{ url_for('root')}}">Inicio</a>
+    <a role="button" class="btn btn-success" href="{{ url_for('pedidos.main')}}">Voltar</a>
+    <form method="post" class="form-control" action="{{ url_for('pedidos.cadastrar') }}">
+        <div class="input-group row">
+            <div class="input-field col s12">{{ form.label_cliente }} {{ form.cliente(class_='autocomplete') }}</div>
+            {{ form.cliente_id }}
+            <div class="input-field col s12">{{ form.label_observacoes }} {{ form.observacoes(class_='form-control me-1') }}</div>
+            <div class="row">
+                <div class="input-field col s5">{{ form.label_produto }} {{ form.produto(class_='autocomplete') }}</div>
+                <div class="input-field col s2">{{ form.label_quantidade }} {{ form.quantidade(class_='') }}</div>
+                <div class="input-field col s2">{{ form.label_valor }} {{ form.valor(class_='') }}</div>
+                <div class="input-field col s2">{{ form.label_desconto }} {{ form.desconto(class_='') }}</div>
+                <div class="input-field col s2">{{ form.total() }}</div>
+                <button name="adicionar" class="btn col s2" role="button" type="submit" onclick="M.toast('oin')">Adicionar</button>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Valor</th>
+                    <th>Desconto</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            {% for item in produtos %}
+                <tr>
+                    <th>#</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Valor</th>
+                    <th>Desconto</th>
+                    <th>Total</th>
+                </tr>
+            {% endfor %}
+            <tfoot>
+                <tr>
+                    <th>Total:</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    <br>
+    <br>
+    <br>
+    <button name="apagar" class="btn red s12" role="button" type="submit" onclick="M.toast('oin')">Deletar</button>
+    </form>
+{% endblock %}
+{% block footer %}
+    <script src="{{ url_for('static', filename='pedido_cadastro.js', path='/') }}"></script>
+{% endblock %}

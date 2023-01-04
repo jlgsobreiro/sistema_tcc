@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="post" class="form-control" action="{{ url_for('profile_id_edit') }}">
+    <label for="firstname">First name</label>
+    <input name="firstname" id="firstname" class="form-control me-1" value="{{ current_user.firstname }}">
+    <label for="lastname">Last name</label>
+    <input name="lastname" id="lastname" class="form-control me-1" value="{{ current_user.lastname }}">
+    <label for="user">Username</label>
+    <input name="user" id="user" class="form-control me-1" value="{{ current_user.username }}">
+    <label for="email">Email</label>
+    <input name="email" id="email" class="form-control me-1" value="{{ current_user.email }}">
+    <button class="btn btn-success" type="submit">Save changes</button>
+</form>
+    <a role="button" class="btn btn-success" href="{{ url_for('root')}}">Voltar</a>
+{% endblock %}

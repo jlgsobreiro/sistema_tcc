@@ -1,0 +1,36 @@
+{% extends 'material/base.html' %}
+{% from 'base.html' import toastr %}
+{{ toastr() }}
+{% block title %}Home Pedidos{% endblock %}
+{% block content %}
+    <a role="button" class="btn btn-success" href="{{ url_for('root')}}">Inicio</a>
+    <a role="button" class="btn btn-success" href="{{ url_for('admin.adm_home')}}">Voltar</a>
+    <a role="button" class="btn btn-success" href="{{ url_for('pedidos.cadastrar')}}">Cadastrar</a>
+     <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Estado Atual</th>
+                <th scope="col">Data</th>
+                <th scope="col">Finalizado</th>
+                <th scope="col">Total</th>
+                <th scope="col">Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in pedidos %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.retorna_nome_cliente() }}</td>
+                    <td>{{ item.estado_atual }}</td>
+                    <td>{{ item.data_cadastro }}</td>
+                    <td>{{ item.finalizado }}</td>
+                    <td>{{ item.total }}</td>
+                    <td><a class="link-primary" href="{{ url_for('pedidos.editar',pedido_id=item.id) }}">Edit</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

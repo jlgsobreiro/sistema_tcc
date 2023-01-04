@@ -1,0 +1,19 @@
+{% extends 'material/base.html' %}
+{% from 'base.html' import toastr %}
+{{ toastr() }}
+{% block tittle %}Home Admin{% endblock %}
+{% block navbar %}
+    <nav>
+    <div class="nav-wrapper blue-grey">
+        <ul>
+            <li><a role="button" class="btn btn-primary" href="/">Inicio</a></li>
+            <li><a role="button" class="btn btn-primary" href="{{ url_for('contas.main') }}">Contas</a></li>
+            <li><a role="button" class="btn btn-primary" href="{{ url_for('produto.main') }}">Produtos</a></li>
+            <li><a role="button" class="btn btn-primary" href="{{ url_for('clientes.main') }}">Clientes</a></li>
+            <li><a role="button" class="btn btn-primary" href="{{ url_for('pedidos.main') }}">Pedidos</a></li>
+            <li><a role="button" class="btn btn-primary" href="{{ url_for('insumos.main') }}">Insumos</a></li>
+            <li><a role="button" class="btn btn-primary" href="{{ url_for('usuarios.main') }}">Usuarios</a></li>
+        </ul>
+    </div>
+    </nav>
+{% endblock %}

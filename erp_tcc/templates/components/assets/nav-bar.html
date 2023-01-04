@@ -1,0 +1,31 @@
+{% from 'components/auth/login.html' import nav_login, nav_logout %}
+{% macro nav_bar(current_user,is_admin) %}
+    <nav>
+        <div class="nav-wrapper blue-grey">
+            {% if current_user.is_authenticated == false %}
+                {{ nav_login() }}
+            {% else %}
+                <ul>
+                    <li><a class="brand-logo center">Bem vindo</a></li>
+
+                    <li><a class="dropdown-trigger btn" href="#" id="navbarDropdown" data-target='dropdown_user'>
+                        {{ current_user.usuario }}
+                    </a>
+                        <ul id="dropdown_user" class="dropdown-content" aria-labelledby="navbarDropdown">
+                        {% if is_admin %}<li><a class="dropdown-item" href="{{ url_for('admin.adm_home') }}">Admin</a></li>{% endif %}
+                        <li><a href="{{ url_for('profile_id_edit') }}">Edit</a></li>
+                        <li><hr class="divider"></li>
+                        <li><a href="#">{{ nav_logout() }}</a></li>
+                    </ul>
+                    </li>
+
+                </ul>
+
+            {% endif %}
+        </div>
+    </nav>
+    <form class="d-flex w-100">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+{% endmacro %}

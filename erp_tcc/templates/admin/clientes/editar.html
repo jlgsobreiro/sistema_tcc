@@ -1,0 +1,27 @@
+{% extends 'material/base.html' %}
+{% from 'base.html' import toastr %}
+{{ toastr() }}
+{% block content %}
+        <a role="button" class="btn btn-success" href="{{ url_for('root')}}">Inicio</a>
+        <a role="button" class="btn btn-success" href="{{ url_for('clientes.main')}}">Voltar</a>
+    <form method="POST" class="form-control" action="{{ url_for('clientes.editar', cliente_id=cliente_id) }}">
+        <div class="form-control">
+            <div class="input-field">{{ form.label_nome }} {{ form.nome(class_='form-control me-1') }}</div>
+            <div class="input-field">{{ form.label_sobrenome }} {{ form.sobrenome(class_='form-control me-1') }}</div>
+            <div class="input-field">{{ form.label_telefone }} {{ form.telefone(class_='form-control me-1') }}</div>
+            <div class="input-field">{{ form.label_cep }} {{ form.cep(class_='form-control me-1') }}</div>
+            <div class="input-field">{{ form.label_uf }} {{ form.uf(class_='form-control me-1') }}</div>
+            <div class="input-field">{{ form.label_cidade }} {{ form.cidade(class_='form-control me-1') }}</div>
+            <div class="input-field">{{ form.label_bairro }} {{ form.bairro(class_='form-control me-1') }}</div>
+            <div class="input-field">{{ form.label_rua }} {{ form.rua(class_='form-control me-1') }}</div>
+            <div class="input-field">{{ form.label_numero }} {{ form.numero(class_='form-control me-1') }}</div>
+            <div class="input-field">{{ form.label_referencia }} {{ form.referencia(class_='form-control me-1') }}</div>
+            <div class="input-field">{{ form.label_cpf_cnpj }} {{ form.cpf_cnpj(class_='form-control me-1') }}</div>
+            <div class="input-field">{{ form.label_emails }} {{ form.emails(class_='form-control me-1') }}</div>
+            <div class="input-field">{{ form.label_ativo(_class='form-check-label') }} {{ form.ativo(class_='form-check-input') }}</div>
+            <br>
+            <button class="btn btn-success" name="save" value="save" type="submit">Save changes</button>
+            <button class="btn btn-success" name="delete" value="delete" type="submit">Delete</button>
+        </div>
+    </form>
+{% endblock %}

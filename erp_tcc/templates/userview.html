@@ -1,0 +1,10 @@
+{% extends 'bootstrap5/base.html' %}
+{% block title %}{{ context.title }}{% endblock %}
+{% block content %}
+    {% set nav_bar_items = [] %}
+    teste teste{{ context }}
+    {% for link, name in context.links_nav_bar %}
+        {{ nav_bar_items.append(render_nav_item(link, name)) or '' }}
+    {% endfor %}
+    {{ render_nav_bar(nav_bar_items) }}
+{% endblock %}

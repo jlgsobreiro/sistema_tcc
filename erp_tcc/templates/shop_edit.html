@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post" class="form-control" action="{{ url_for('edit_shop_id',shop_id=shop.get_id()) }}">
+        <label for="shop_name">Name</label>
+        <input name="shop_name" id="shop_name" class="form-control me-1" value="{{ shop.name }}">
+        <label for="address">Address</label>
+        <input name="address" id="address" class="form-control me-1" value="{{ shop.address }}">
+        <button class="btn-success" type="submit">Save changes</button>
+    </form>
+    <button class="btn-success" type="button">
+        <a class="btn-success" href="{{ url_for('root')}}">Home</a>
+    </button>
+    {% for item in shop.get_inventory %}
+        <a class="btn-success" href="{{ url_for('loja_product_id',_id=shop.get_id())}}">{{ item.name }}</a>
+    {% endfor %}
+    <button class="btn-outline-success" type="button">
+        <a class="btn-success" href="{{ url_for('shop_invetory',_id=shop.get_id())}}">Inventory</a>
+    </button>
+{% endblock %}

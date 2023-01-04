@@ -1,0 +1,41 @@
+{% extends 'material/base.html' %}
+{% from 'base.html' import toastr %}
+{{ toastr() }}
+{% block tittle %}Home Produtos{% endblock %}
+{% block content %}
+    <a role="button" class="btn btn-success" href="{{ url_for('root')}}">Inicio</a>
+    <a role="button" class="btn btn-success" href="{{ url_for('admin.adm_home')}}">Voltar</a>
+    <a role="button" class="btn btn-success" href="{{ url_for('produto.cadastrar')}}">Cadastrar</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Unidade</th>
+                <th scope="col">Estoque</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Custo</th>
+                <th scope="col">Codigo de barras</th>
+                <th scope="col">Origem</th>
+                <th scope="col">Ativo</th>
+                <th scope="col">Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in produtos %}
+                <tr>
+                    <th scope="row">{{ item.get_id() }}</th>
+                    <td>{{ item.nome }}</td>
+                    <td>{{ item.unidade }}</td>
+                    <td>{{ item.quantidade }}</td>
+                    <td>{{ item.valor }}</td>
+                    <td>{{ item.custo }}</td>
+                    <td>{{ item.codigo_de_barras }}</td>
+                    <td>{{ item.origem }}</td>
+                    <td>{{ item.active }}</td>
+                    <td><a class="link-primary" href="{{ url_for('produto.editar_produto',_product_id=item.get_id()) }}">Edit</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

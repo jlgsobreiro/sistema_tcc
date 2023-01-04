@@ -1,0 +1,13 @@
+{% extends 'bootstrap5/base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <div class="container col justify-content-center">
+        <div class="row">
+            {{ render_messages() }}
+        </div>
+        <div class="row">
+            {{ render_form(form) }}
+        </div>
+        <a class="btn btn-primary" role="button" href="{{ url_for('register') }}">Register</a>
+    </div>
+{% endblock %}

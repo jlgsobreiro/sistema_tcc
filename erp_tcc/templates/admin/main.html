@@ -1,0 +1,9 @@
+{% extends 'material/base.html' %}
+{% from 'base.html' import toastr %}
+{% from 'components/assets/nav-bar.html' import nav_bar %}
+{{ toastr() }}
+{% block tittle %}Login Admin{% endblock %}
+{% block content %}
+    {{ nav_bar(current_user) }}
+    <H1>Hello Main!</H1>
+{% endblock %}

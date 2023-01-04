@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% from 'components/auth/register.html' import register_shop %}
+{% block content %}
+<h1>Create Shop</h1>
+    <form action="{{ url_for('api.api_register_shop') }}" method="post" class="text-center">
+        <div class="mb-3">
+          <label for="shp_name" class="form-label">Shop name</label>
+          <input name="name" type="text" class="form-control" id="shp_name" placeholder="Heisenberg">
+        </div>
+        <div class="mb-3">
+          <label for="shp_address" class="form-label">Address</label>
+          <input name="address" type="text" class="form-control" id="shp_address" placeholder="heisenberg@email.com">
+        </div>
+        <button class="btn-success" type="submit">Submit</button>
+    </form>
+{% endblock %}

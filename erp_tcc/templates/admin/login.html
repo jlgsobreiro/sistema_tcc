@@ -1,0 +1,12 @@
+{% extends 'material/base.html' %}
+{% from 'base.html' import toastr %}
+{% from 'components/auth/login.html' import adm_login %}
+{{ toastr() }}
+{% block tittle %}Login Admin{% endblock %}
+{% block content %}
+    <div class="w-100 h-50 d-flex flex-row justify-content-center">
+        <div class="col-3 p-3 centered shadow-lg rounded">
+            {{ adm_login() }}
+        </div>
+    </div>
+{% endblock %}

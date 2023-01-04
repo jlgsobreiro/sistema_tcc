@@ -1,0 +1,22 @@
+{% extends 'material/base.html' %}
+{% from 'base.html' import toastr %}
+{{ toastr() }}
+{% block title %}Home Contas{% endblock %}
+{% block content %}
+    <a role="button" class="btn btn-success" href="{{ url_for('root')}}">Inicio</a>
+    <a role="button" class="btn btn-success" href="{{ url_for('contas.main')}}">Voltar</a>
+    <form method="post" class="form-control" action="{{ url_for('contas.registra_conta')}}">
+        <div class="input-field">{{ form.label_empresa }}{{ form.empresa(class_='autocomplete') }}</div>
+        <div class="input-field">{{ form.label_valor }}{{ form.valor(class_='input-field') }}</div>
+        <div class="input-field">{{ form.label_juros }}{{ form.juros(class_='input-field') }}</div>
+        <div class="input-field">{{ form.label_multa }}{{ form.multa(class_='input-field') }}</div>
+        <div class="input-field">{{ form.label_data_cadastro }}{{ form.data_cadastro(class_='input-field') }}</div>
+        <div class="input-field">{{ form.labeldata_vencimento }}{{ form.data_vencimento(class_='input-field') }}</div>
+        <div class="input-field">{{ form.label_data_baixa }}{{ form.data_baixa(class_='input-field') }}</div>
+        <button class="btn btn-success" type="submit">Salvar</button>
+    </form>
+    <H1>Hello Main!</H1>
+{% endblock %}
+{% block footer %}
+    <script src="{{ url_for('static', filename='contas.js', path='/') }}"></script>
+{% endblock %}

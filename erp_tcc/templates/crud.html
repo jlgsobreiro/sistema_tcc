@@ -1,0 +1,10 @@
+{% extends 'bootstrap5/base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    {% if form %}
+        {{ reder_form(form) }}
+    {% endif %}
+    {% if table %}
+        {{ render_new_table(table,permissions, edit_url, delete_url) }}
+    {% endif %}
+{% endblock %}

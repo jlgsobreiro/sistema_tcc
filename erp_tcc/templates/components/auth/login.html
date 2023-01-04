@@ -1,0 +1,39 @@
+{% macro login() %}
+    <h1>Sign In</h1>
+    <form action="{{ url_for('api.api_login') }}" method="post" class="text-center">
+        <div class="mb-3">
+          <label for="lg_username">Username</label>
+          <input name="username" type="text" class="input-field" id="lg_username" placeholder="Heisenberg">
+        </div>
+        <div class="mb-3">
+          <label for="lg_password">Password</label>
+          <input name="password" type="password" class="input-field" id="lg_password" placeholder="Password">
+        </div>
+        <button class="btn" type="submit">Submit</button>
+    </form>
+{% endmacro %}
+{% macro adm_login() %}
+    <h1>Sign In</h1>
+    <form action="{{ url_for('admin.login') }}" method="post" class="text-center">
+        <div class="mb-3">
+          <label for="lg_username">Username</label>
+          <input name="username" type="text" class="input-field" id="lg_username" placeholder="Heisenberg">
+        </div>
+        <div class="mb-3">
+          <label for="lg_password">Password</label>
+          <input name="password" type="password" class="input-field" id="lg_password" placeholder="Password">
+        </div>
+        <button class="btn-success" type="submit">Submit</button>
+    </form>
+{% endmacro %}
+{% macro nav_login() %}
+    <div class="d-flex">
+        <a role="button" href="{{ url_for('login_screen') }}" class="btn btn-success" style="margin-right: 1rem" type="button">Log In</a>
+        <a role="button" href="{{ url_for('register_screen') }}" class="btn btn-outline-success" type="button">Sign In</a>
+    </div>
+{% endmacro %}
+{% macro nav_logout() %}
+    <form method="post" action="{{ url_for('api.api_logout') }}" class="d-flex">
+        <button  onclick="window.location.href='{{ url_for('root') }}'" class="btn-success h-100 me-1" type="submit">Log out</button>
+    </form>
+{% endmacro %}

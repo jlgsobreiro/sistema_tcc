@@ -1,0 +1,33 @@
+{% from 'bootstrap5/form.html' import render_form %}
+{% from 'bootstrap5/pagination.html' import render_pager, render_pagination %}
+{% from 'bootstrap5/nav.html' import render_nav_item, render_breadcrumb_item, render_nav_bar %}
+{% from 'bootstrap5/utils.html' import render_static, render_messages, render_icon %}
+{% from 'bootstrap5/table.html' import render_table, render_new_table %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {% block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+        {% endblock %}
+
+        <title>{% block title %}{% endblock %}</title>
+        {% endblock %}
+    </head>
+    <body>
+        {{ render_nav_bar(links_nav_bar) }}
+        <!-- Your page content -->
+        {% block content %}{% endblock %}
+
+        {% block scripts %}
+            <!-- Optional JavaScript -->
+            {{ bootstrap.load_js() }}
+        {% endblock %}
+    </body>
+</html>

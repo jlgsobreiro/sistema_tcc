@@ -1,0 +1,76 @@
+{% macro register() %}
+    <h1>Sign Up</h1>
+    <form action="{{ url_for('api.register') }}" method="post" class="text-center">
+        <div class="mb-3">
+          <label for="rg_username" class="form-label">Username</label>
+          <input name="username" type="text" class="form-control" id="rg_username" placeholder="Heisenberg">
+        </div>
+        <div class="mb-3">
+          <label for="rg_email" class="form-label">Email</label>
+          <input name="email" type="email" class="form-control" id="rg_email" placeholder="heisenberg@email.com">
+        </div>
+            <div class="mb-3">
+          <label for="rg_firstname" class="form-label">First Name</label>
+          <input name="firstname" type="text" class="form-control" id="rg_firstname" placeholder="Heisenberg">
+        </div>
+        <div class="mb-3">
+          <label for="rg_lastname" class="form-label">Last Name</label>
+          <input name="lastname" type="text" class="form-control" id="rg_lastname" placeholder="Distberg">
+        </div>
+        <div class="mb-3">
+          <label for="rg_password" class="form-label">Password</label>
+          <input name="password" type="password" class="form-control" id="rg_password" placeholder="Password">
+        </div>
+        <div class="mb-3">
+          <label for="rg_repassword" class="form-label">Re-Password</label>
+          <input name="repassword" type="password" class="form-control" id="rg_repassword" placeholder="Re-password">
+        </div>
+        <button class="btn-success" type="submit">Submit</button>
+    </form>
+{% endmacro %}
+
+
+{% macro register_shop() %}
+    <h1>Sign Up</h1>
+    <form action="/api/registrar_loja" method="post" class="text-center">
+        <div class="mb-3">
+          <label for="shp_name" class="form-label">Shop name</label>
+          <input name="name" type="text" class="form-control" id="shp_name" placeholder="Heisenberg">
+        </div>
+        <div class="mb-3">
+          <label for="shp_address" class="form-label">Address</label>
+          <input name="address" type="text" class="form-control" id="shp_address" placeholder="heisenberg@email.com">
+        </div>
+        <button class="btn-success" type="submit">Submit</button>
+    </form>
+{% endmacro %}
+
+{% macro register_admin() %}
+    <form action="/admin/registrar" method="post" class="form-control text-center">
+        <div class="mb-3">
+          <label for="rg_username" class="form-label">Username</label>
+          <input name="username" type="text" class="form-control" id="rg_username" placeholder="Heisenberg">
+        </div>
+        <div class="mb-3">
+          <label for="rg_email" class="form-label">Email</label>
+          <input name="email" type="email" class="form-control" id="rg_email" placeholder="heisenberg@email.com">
+        </div>
+            <div class="mb-3">
+          <label for="rg_firstname" class="form-label">First Name</label>
+          <input name="firstname" type="text" class="form-control" id="rg_firstname" placeholder="Heisenberg">
+        </div>
+        <div class="mb-3">
+          <label for="rg_lastname" class="form-label">Last Name</label>
+          <input name="lastname" type="text" class="form-control" id="rg_lastname" placeholder="Distberg">
+        </div>
+        <div class="mb-3">
+          <label for="rg_password" class="form-label">Password</label>
+          <input name="password" type="password" class="form-control" id="rg_password" placeholder="Password">
+        </div>
+        <div class="mb-3">
+          <label for="rg_repassword" class="form-label">Re-Password</label>
+          <input name="repassword" type="password" class="form-control" id="rg_repassword" placeholder="Re-password">
+        </div>
+        <button class="btn-success" type="submit">Submit</button>
+    </form>
+{% endmacro %}

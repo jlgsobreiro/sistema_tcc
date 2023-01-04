@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{#{% from 'base.html' import toastr %}#}
+{#{{ toastr() }}#}
+{% block tittle %}Teste{% endblock %}
+{% block content %}
+    <div class="container d-flex justify-content-center">
+        <form method="post" class="text-center">
+            {{ form.csrf_token }}
+            {% for field in form %}
+                <div class="input-field">{{ field.label }} {{ field(class_='form-control me-1') }}</div>
+            {% endfor %}
+            <button class="btn-success" type="submit">Submit</button>
+        </form>
+{#        <div class="p-3 col-lg-3 col-md-3 col-sm-3">#}
+{#            <h1>Sign Up</h1>#}
+{#            <form action="{{ url_for('api.register') }}" method="post" class="text-center">#}
+{#                <div class="mb-3">#}
+{#                  <label for="rg_username" class="form-label">Username</label>#}
+{#                  <input name="username" type="text" class="form-control" id="rg_username" placeholder="Heisenberg">#}
+{#                </div>#}
+{#                <div class="mb-3">#}
+{#                  <label for="rg_email" class="form-label">Email</label>#}
+{#                  <input name="email" type="email" class="form-control" id="rg_email" placeholder="heisenberg@email.com">#}
+{#                </div>#}
+{#                    <div class="mb-3">#}
+{#                  <label for="rg_firstname" class="form-label">First Name</label>#}
+{#                  <input name="firstname" type="text" class="form-control" id="rg_firstname" placeholder="Heisenberg">#}
+{#                </div>#}
+{#                <div class="mb-3">#}
+{#                  <label for="rg_lastname" class="form-label">Last Name</label>#}
+{#                  <input name="lastname" type="text" class="form-control" id="rg_lastname" placeholder="Distberg">#}
+{#                </div>#}
+{#                <div class="mb-3">#}
+{#                  <label for="rg_password" class="form-label">Password</label>#}
+{#                  <input name="password" type="password" class="form-control" id="rg_password" placeholder="Password">#}
+{#                </div>#}
+{#                <div class="mb-3">#}
+{#                  <label for="rg_repassword" class="form-label">Re-Password</label>#}
+{#                  <input name="repassword" type="password" class="form-control" id="rg_repassword" placeholder="Re-password">#}
+{#                </div>#}
+{#                <button class="btn-success" type="submit">Submit</button>#}
+{#            </form>#}
+{#        </div>#}
+    </div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base/table.html' %}
+
+{% macro render_new_table(list_dict,permissions, edit_url, delete_url) %}
+    <table class="table striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            {% for key in list_dict[0] %}
+                <th scope="col">{{ key }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody class="accordion">
+        {% for item in list_dict %}
+            <tr class="accordion-item" role="button"> {#  TODO: Usar accordion com um form para edição/apagamento do item#}
+                <th scope="col">
+                    {{ edit_row(item['id'], edit_url) if 'edit' in permissions else '' }}
+                    {{ delete_row(item['id'], delete_url) if 'delete' in permissions else '' }}
+                </th>
+                {% for key in item %}
+                    <td>{{ item[key] }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endmacro %}
+
+{% macro delete_row(id, url) %}
+    <form class="d-inline" action="{{ url_for(url, id_item=id) }}" method="post">
+{#        {% if csrf_token is undefined %}#}
+{#            {{ raise('You have to enable the CSRFProtect extension from Flask-WTF to use delete_url, see the docs for more details (https://bootstrap-flask.readthedocs.io/en/stable/macros.html#render-table).') }}#}
+{#        {% endif %}#}
+{#        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>#}
+        <button type="button" class="btn btn-link p-0 border-0 align-baseline" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+            {{ render_icon('trash-fill') }}
+        </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Deseja apagar o registro {{ id }}?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger" title="{{ config['BOOTSTRAP_TABLE_DELETE_TITLE'] }}">Apagar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+
+{% endmacro %}
+
+{% macro edit_row(id, url) %}
+    <a class="action-icon text-decoration-none" href="{{ url_for(url, id_item=id) }}" title="{{ config['BOOTSTRAP_TABLE_EDIT_TITLE'] }}">
+        {{ render_icon('pencil-fill') }}
+    </a>
+{% endmacro %}

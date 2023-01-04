@@ -1,0 +1,34 @@
+{% extends 'material/base.html' %}
+{% from 'base.html' import toastr %}
+{{ toastr() }}
+{% block title %}Home Clientes{% endblock %}
+{% block content %}
+    <a role="button" class="btn btn-success" href="{{ url_for('root')}}">Inicio</a>
+    <a role="button" class="btn btn-success" href="{{ url_for('admin.adm_home')}}">Voltar</a>
+    <a role="button" class="btn btn-success" href="{{ url_for('usuarios.cadastrar')}}">Cadastrar</a>
+     <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Endereço</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Ativo</th>
+                <th scope="col">Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in usuarios %}
+                <tr>
+                    <th scope="row">{{ item.get('_id').get('$oid') }}</th>
+                    <td>{{ item.get('nome')}} {{item.get('sobrenome') }}</td>
+                    <td>{{ item.get('rua')}}, {{item.get('numero') }}</td>
+                    <td>{{ item.get('email') }}</td>
+                    <td>{{ item.get('condicao') }}</td>
+                    <td><a class="link-primary" href="{{ url_for('usuarios.editar',usuario_id=item.get('_id').get('$oid')) }}">Edit</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
