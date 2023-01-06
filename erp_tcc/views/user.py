@@ -1,5 +1,3 @@
-from flask.views import MethodView
-
 from models.Usuario import Usuario
 from repository.usuario import RepositorioUsuarios
 from views.base_crud import SimpleCRUD
