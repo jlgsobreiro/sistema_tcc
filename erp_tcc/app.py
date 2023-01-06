@@ -28,8 +28,8 @@ links_nav_bar = [
     ('main', 'Main'),
     ('home', 'Home'),
     # (user_table_view_endpoint.replace('/', ''), 'Usuarios')
-    ('userview.table_view', 'Usuarios'),
-    ('produtoview.table_view', 'Produtos')
+    ('/userview', 'Usuarios'),
+    ('/produtoview', 'Produtos')
 ]
 
 bootstrap = Bootstrap5()
@@ -45,10 +45,12 @@ user_create_view_endpoint, user_create_view_as_view = user_view.url_rule_create(
 user_delete_view_endpoint, user_delete_view_as_view = user_view.url_rule_delete()
 
 user_view.links_nav_bar = links_nav_bar
-app.add_url_rule(user_table_view_endpoint, view_func=user_table_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
-app.add_url_rule(user_edit_view_endpoint, view_func=user_edit_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
-app.add_url_rule(user_create_view_endpoint, view_func=user_create_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
-app.add_url_rule(user_delete_view_endpoint, view_func=user_delete_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
+print('xyz')
+print(user_table_view_endpoint)
+app.add_url_rule(user_table_view_endpoint, endpoint=user_table_view_endpoint, view_func=user_table_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
+app.add_url_rule(user_edit_view_endpoint, endpoint=user_edit_view_endpoint, view_func=user_edit_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
+app.add_url_rule(user_create_view_endpoint, endpoint=user_create_view_endpoint, view_func=user_create_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
+app.add_url_rule(user_delete_view_endpoint, endpoint=user_delete_view_endpoint, view_func=user_delete_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
 
 produto_view = ProdutoView
 produto_view.links_nav_bar = links_nav_bar
@@ -58,11 +60,13 @@ produto_create_view_endpoint, produto_create_view_as_view = produto_view.url_rul
 produto_delete_view_endpoint, produto_delete_view_as_view = produto_view.url_rule_delete()
 
 produto_view.links_nav_bar = links_nav_bar
-app.add_url_rule(produto_table_view_endpoint, view_func=produto_table_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
-app.add_url_rule(produto_edit_view_endpoint, view_func=produto_edit_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
-app.add_url_rule(produto_create_view_endpoint, view_func=produto_create_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
-app.add_url_rule(produto_delete_view_endpoint, view_func=produto_delete_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
+app.add_url_rule(produto_table_view_endpoint, endpoint=produto_table_view_endpoint, view_func=produto_table_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
+app.add_url_rule(produto_edit_view_endpoint, endpoint=produto_edit_view_endpoint, view_func=produto_edit_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
+app.add_url_rule(produto_create_view_endpoint, endpoint=produto_create_view_endpoint, view_func=produto_create_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
+app.add_url_rule(produto_delete_view_endpoint, endpoint=produto_delete_view_endpoint, view_func=produto_delete_view_as_view, methods=['POST', 'GET', 'PUT', 'DELETE'])
 
+for rule in app.url_map.iter_rules():
+    print(rule.endpoint)
 
 @login_manager.user_loader
 def load_user(user_id):

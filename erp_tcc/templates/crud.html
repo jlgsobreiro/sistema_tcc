@@ -2,9 +2,10 @@
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
     {% if form %}
-        {{ reder_form(form) }}
+        {{ render_form(form) }}
     {% endif %}
     {% if table %}
-        {{ render_new_table(table,permissions, edit_url, delete_url) }}
+        <a role="button" class="btn btn-primary" href={{ "/"+cls_endpoint+"/create" }}>Criar</a>
+        {{ render_new_table(table,permissions, cls_endpoint) }}
     {% endif %}
 {% endblock %}

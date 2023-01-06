@@ -1,6 +1,6 @@
 {% extends 'base/table.html' %}
 
-{% macro render_new_table(list_dict,permissions, edit_url, delete_url) %}
+{% macro render_new_table(list_dict,permissions, cls_endpoint) %}
     <table class="table striped">
         <thead>
         <tr>
@@ -14,8 +14,8 @@
         {% for item in list_dict %}
             <tr class="accordion-item" role="button"> {#  TODO: Usar accordion com um form para edição/apagamento do item#}
                 <th scope="col">
-                    {{ edit_row(item['id'], edit_url) if 'edit' in permissions else '' }}
-                    {{ delete_row(item['id'], delete_url) if 'delete' in permissions else '' }}
+                    {{ edit_row(item['id'], cls_endpoint) if 'edit' in permissions else '' }}
+                    {{ delete_row(item['id'], cls_endpoint) if 'delete' in permissions else '' }}
                 </th>
                 {% for key in item %}
                     <td>{{ item[key] }}</td>
@@ -26,8 +26,8 @@
     </table>
 {% endmacro %}
 
-{% macro delete_row(id, url) %}
-    <form class="d-inline" action="{{ url_for(url, id_item=id) }}" method="post">
+{% macro delete_row(id, cls_endpoint) %}
+    <form class="d-inline" action="{{ "/"+cls_endpoint+'/delete/'+id }}" method="post">
 {#        {% if csrf_token is undefined %}#}
 {#            {{ raise('You have to enable the CSRFProtect extension from Flask-WTF to use delete_url, see the docs for more details (https://bootstrap-flask.readthedocs.io/en/stable/macros.html#render-table).') }}#}
 {#        {% endif %}#}
@@ -59,8 +59,8 @@
 
 {% endmacro %}
 
-{% macro edit_row(id, url) %}
-    <a class="action-icon text-decoration-none" href="{{ url_for(url, id_item=id) }}" title="{{ config['BOOTSTRAP_TABLE_EDIT_TITLE'] }}">
+{% macro edit_row(id, cls_endpoint) %}
+    <a class="action-icon text-decoration-none" href="{{ "/"+cls_endpoint+'/edit/'+id }}" title="{{ config['BOOTSTRAP_TABLE_EDIT_TITLE'] }}">
         {{ render_icon('pencil-fill') }}
     </a>
 {% endmacro %}

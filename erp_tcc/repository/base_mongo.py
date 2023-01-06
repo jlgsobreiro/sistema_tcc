@@ -33,14 +33,20 @@ class BaseMongo:
 
     @classmethod
     def get_all_to_dict_list(cls):
-        return [x.to_dict() for x in cls.Meta.model.objects()]
+        return [cls.to_dict_with_id(x) for x in cls.Meta.model.objects()]
 
     @classmethod
-    def to_dict(cls):
+    def to_dict(cls, model):
         to_dict = {}
-        for value in cls.Meta.model:
+        for value in model:
             if value != 'id':
-                to_dict[value] = getattr(cls.Meta.model, value)
+                to_dict[value] = getattr(model, value)
+        return to_dict
+    @classmethod
+    def to_dict_with_id(cls, model):
+        to_dict = {}
+        for value in model:
+            to_dict[value] = str(getattr(model, value))
         return to_dict
 
     # NOME_TABELA = ''

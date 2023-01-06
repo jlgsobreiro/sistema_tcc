@@ -2,8 +2,25 @@ import ft as ft
 from flask import render_template, request, flash, redirect, url_for
 from flask.views import View, MethodView
 from flask_mongoengine.wtf import model_form
+from flask_wtf import FlaskForm
+from mongoengine import Document
+import wtforms.fields as wtf_fields
+from wtforms.validators import DataRequired
 
 from repository.base_mongo import BaseMongo
+
+
+class MetaForm(FlaskForm):
+    def __init__(self, model: Document, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        fields = [(x, model._fields[x]) for x in model._fields if x != 'id']
+        for field_name, field_type in fields:
+            wtforms_field = getattr(wtf_fields, str(field_type.__class__.__name__))
+            field_instance = wtforms_field(label=field_name, validators=[DataRequired()], value='')
+            print(field_instance.__dict__)
+            setattr(self, field_name, field_instance)
+        self.populate_obj(model)
+
 
 
 class SimpleCRUD:
@@ -95,19 +112,33 @@ class SimpleCRUD:
     @classmethod
     def get_repository(cls):
         base_repository = BaseMongo
-        base_repository.meta = cls.meta
+        base_repository.meta = cls.Meta.meta
         return base_repository
 
     @classmethod
     def table_view(cls):
-        table_data = cls.get_repository().find()
-        return render_template("table.html", title=cls.title, links_nav_bar=cls.links_nav_bar, data=table_data,
-                               permissions=cls.permissoes)
+        _id = request.form.get('id', '')
+
+        cls.table = cls.Meta.repo().get_all_to_dict_list()
+        print(cls.table)
+        try:
+            print('opa')
+            return render_template('crud.html',
+                                   title=cls.title,
+                                   links_nav_bar=cls.links_nav_bar,
+                                   form=cls.form,
+                                   table=cls.table,
+                                   permissions=cls.permissoes,
+                                   cls_endpoint=cls.__name__.lower(),
+                                   id=_id)
+        except Exception as e:
+            print('Erro: ', e)
+            return render_template('not_found.html')
 
     @classmethod
-    def edit_view(cls, id_item):
-        edit_data = cls.get_repository().find_one(id=id_item)
-        edit_form = model_form(instance=cls.meta)
+    def edit_view(cls, id_item=None):
+        edit_data = cls.Meta.repo().find_one(id=id_item)
+        edit_form = model_form(edit_data)
         form = edit_form(request.form)
         print(id_item)
         if request.method == "PUT":
@@ -116,31 +147,34 @@ class SimpleCRUD:
         return render_template("edit.html", title=cls.title, links_nav_bar=cls.links_nav_bar, form=form)
 
     @classmethod
-    def delete_view(cls, id_item):
+    def delete_view(cls, id_item=None):
         flash('apagando')
-        cls.get_repository().find_one(id=id_item).delete()
+        cls.Meta.repo().find_one(id=id_item).delete()
         print(id_item)
         return cls.table_view()
 
-    def delete(self, id_item):
+    def delete(self, id_item=None):
         print(id_item)
 
     @classmethod
     def create_view(cls):
-        return render_template("crud.html", title=cls.title, links_nav_bar=cls.links_nav_bar)
+        form = MetaForm(cls.Meta.meta())
+        # form = model_form(cls.Meta.meta())
+
+        return render_template("crud.html", title=cls.title, links_nav_bar=cls.links_nav_bar, form=form)
 
     @classmethod
     def url_rule_table(cls):
-        return f'/{cls.__name__.lower()}/table_view', cls.as_view(f'{cls.__name__.lower()}.table_view')
+        return f'/{cls.__name__.lower()}', cls.table_view
 
     @classmethod
     def url_rule_edit(cls):
-        return f'/{cls.__name__.lower()}/edit_view/<id_item>', cls.as_view(f'{cls.__name__.lower()}.edit_view')
+        return f'/{cls.__name__.lower()}/edit/<id_item>', cls.edit_view
 
     @classmethod
     def url_rule_delete(cls):
-        return f'/{cls.__name__.lower()}/delete_view/<id_item>', cls.as_view(f'{cls.__name__.lower()}.delete')
+        return f'/{cls.__name__.lower()}/delete/<id_item>', cls.delete_view
 
     @classmethod
     def url_rule_create(cls):
-        return f'/{cls.__name__.lower()}/create_view', cls.as_view(f'{cls.__name__.lower()}.create_view')
+        return f'/{cls.__name__.lower()}/create', cls.create_view
